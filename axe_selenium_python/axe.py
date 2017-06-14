@@ -5,15 +5,18 @@
 
 class Axe:
 
-    def get_contents(script):
+    def get_contents(self, script_url):
         """
         Return contents of the axe.js or axe.min.js script.
 
-        :param script: URL of the axe-core script.
-        :type script: string
+        :param script_url: URL of the axe-core script.
+        :type script_url: string
         :return: contents of script.
         :rtype: string
         """
+        with open(script_url, 'r') as file:
+            script = file.read().replace('\n', '')
+        return script
 
     def inject(driver, script_url):
         """
@@ -75,7 +78,7 @@ class Axe:
             :param script: URL of aXe script.
             :type driver: WebDriver
             :type script: string
-            """"
+            """
 
         def options(options):
             """
