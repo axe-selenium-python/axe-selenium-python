@@ -5,14 +5,12 @@
 
 from setuptools import setup
 
-setup(name='axe-selenium-python',
+setup(name='axe_selenium_python',
       version='0.1',
       description='Python library to integrate axe and selenium for web \
                     accessibility testing.',
-    url='http://github.com/kimberlythegeek/axe-selenium-python',
+    url='http://github.com/kimberlythegeek/axe_selenium_python',
     author='Kimberly Pennington',
     license='MPL',
-    packages=['axe-selenium-python'],
-    install_requires=[
-    ],
+    packages=['axe_selenium_python'],
     zip_safe=False)
