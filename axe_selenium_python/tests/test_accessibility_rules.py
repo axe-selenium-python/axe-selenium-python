@@ -3,11 +3,7 @@
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-import json
 import pytest
-import time
-# import utils
-import pytest_selenium
 from axe_selenium_python import Axe
 
 
@@ -18,15 +14,21 @@ class TestAccessibility:
         """Run axe against base_url and verify JSON output."""
 
         script_url = 'src/axe.min.js'
+        global a
         a = Axe(selenium, script_url)
         response = a.execute(selenium)
         # parsed = json.loads(response)
 
         global test_results
-        # test_results = utils.parse_results(parsed['violations'])
+        # convert array to dictionary
         test_results = dict((k['id'], k) for k in response['violations'])
 
         assert response is not None, response
+
+    @pytest.mark.nondestructive
+    def test_report(self):
+        report = a.report(test_results)
+        assert report is None, report
 
     @pytest.mark.nondestructive
     def test_accesskeys(self):
