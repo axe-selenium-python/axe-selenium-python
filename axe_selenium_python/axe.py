@@ -64,7 +64,7 @@ class Axe:
     #         # Recurse and search for frames within current frame
     #         self.inject_into_frames(script, local_parents)
 
-    def report(violations):
+    def report(self, violations):
         """
         Return readable report of accessibility violations found.
 
@@ -73,6 +73,11 @@ class Axe:
         :return report: Readable report of violations.
         :rtype: string
         """
+        string = ''
+        string += 'Found ' + str(len(violations)) + ' accessibility violations:'
+        for index, item in enumerate(violations):
+            string += '\n' + str(index + 1) + ') ' + violations[item]['help']
+        return string
 
     def write_results(name, output):
         """
