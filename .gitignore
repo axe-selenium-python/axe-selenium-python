@@ -9,7 +9,7 @@
 .eggs/
 
 __pycache__
-
 .cache/
-
 .tox
+*.log
+*.html
