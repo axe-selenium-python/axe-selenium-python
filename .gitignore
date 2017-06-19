@@ -13,3 +13,4 @@ __pycache__
 .tox
 *.log
 *.html
+assets/
