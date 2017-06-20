@@ -4,6 +4,11 @@
 
 
 import pytest
+import re
+import time
+import os
+import sys
+
 from axe_selenium_python import Axe
 
 
@@ -15,6 +20,7 @@ class TestAccessibility:
 
         script_url = 'src/axe.min.js'
         global a
+        selenium.get(base_url)
         a = Axe(selenium, script_url)
         response = a.execute(selenium)
         # parsed = json.loads(response)
@@ -22,13 +28,36 @@ class TestAccessibility:
         global test_results
         # convert array to dictionary
         test_results = dict((k['id'], k) for k in response['violations'])
-
+        # assert response exists
         assert response is not None, response
 
     @pytest.mark.nondestructive
+    def test_write_results(self, base_url):
+        """Write JSON results to file."""
+        # get string of current python version
+        version = 'v' + str(sys.version_info[0]) + '_' + \
+            str(sys.version_info[1]) + '_' + str(sys.version_info[2])
+        # strip protocol and dots
+        filename = re.sub('(http:\/\/|https:\/\/|\.php|\.asp|\.html)', '', base_url)
+        # replace slashes with underscores
+        filename = re.sub('(\/|\.)', '_', filename)
+        # create filename "examplecom-datetime-python-version.json"
+        filename += '-' + time.strftime('%m-%d-%y-%X') + '-' + version + '.json'
+        a.write_results(filename, test_results)
+        # check that file exists and is not empty
+        assert os.path.exists(filename) and os.path.getsize(filename) > 0, \
+            'Output file not found.'
+
+    @pytest.mark.nondestructive
+    def test_violations(self):
+        """Assert that no violations were found."""
+        assert len(test_results) == 0, a.report(test_results)
+
+    @pytest.mark.nondestructive
     def test_report(self):
+        """Test that report exists"""
         report = a.report(test_results)
-        assert report is None, report
+        assert report is not None, report
 
     @pytest.mark.nondestructive
     def test_accesskeys(self):

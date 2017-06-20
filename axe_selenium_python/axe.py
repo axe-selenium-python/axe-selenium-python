@@ -54,10 +54,13 @@ class Axe:
 
         return string
 
-    def write_results(name, output):
+    def write_results(self, name, output):
         """
         Write JSON to file with the specified name.
 
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
+        file = open(name, 'w+')
+        file.write(json.dumps(output, indent=4))
+        file.close
