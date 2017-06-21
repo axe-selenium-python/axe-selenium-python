@@ -22,8 +22,22 @@ class Axe:
         """
         selenium.execute_script(open(script_url).read())
 
-    def execute(self, selenium):
-        command = 'return axe.run().then(function(result){return result;});'
+    def execute(self, context=None, options=None, selenium):
+        """
+        Run axe against the current page.
+
+        :param context: which part of the page to analyze and/or what to exclude.
+        :param options: dictionary of aXe options.
+        """
+        command = 'return axe.run('
+        if context is not None:
+            command += options
+        if context is not None and options is not None:
+            command +=','
+        if options is not None:
+            command += options
+        command += ').then(function(result){return result;});'
+
         response = selenium.execute_script(command)
         return response
 
