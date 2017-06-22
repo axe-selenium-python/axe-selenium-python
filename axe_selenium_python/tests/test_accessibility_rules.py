@@ -26,6 +26,7 @@ class TestAccessibility:
 
         global test_results
         global violations
+        test_results = response
         # convert array to dictionary
         violations = dict((k['id'], k) for k in response['violations'])
         # assert response exists
