@@ -15,3 +15,6 @@ __pycache__
 *.html
 assets/
 *.json
+
+!axe_selenium_python/tests/examples/*.json
+!axe_selenium_python/tests/examples/*.html
