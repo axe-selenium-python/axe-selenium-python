@@ -22,7 +22,7 @@ class Axe:
         """
         selenium.execute_script(open(script_url).read())
 
-    def execute(self, context=None, options=None, selenium):
+    def execute(self, selenium, context=None, options=None):
         """
         Run axe against the current page.
 
