@@ -22,6 +22,11 @@ class Axe:
         """
         selenium.execute_script(open(script_url).read())
 
+    def get_rules(self, selenium):
+        """Return array of accessibility rules."""
+        response = selenium.execute_script('return axe.getRules();')
+        return response
+
     def execute(self, selenium, context=None, options=None):
         """
         Run axe against the current page.
@@ -31,7 +36,7 @@ class Axe:
         """
         command = 'return axe.run('
         if context is not None:
-            command += options
+            command += context
         if context is not None and options is not None:
             command +=','
         if options is not None:
