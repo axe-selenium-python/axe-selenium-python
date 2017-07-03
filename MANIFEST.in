@@ -1,1 +1,3 @@
 include README.rst
+recursive-include *.rst
+recursive-include *.txt
