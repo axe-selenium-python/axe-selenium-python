@@ -5,7 +5,6 @@
 from datetime import datetime
 from py.xml import html
 import pytest
-# import json
 
 
 @pytest.mark.optionalhook
