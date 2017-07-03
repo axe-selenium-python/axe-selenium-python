@@ -9,7 +9,6 @@ import time
 class Axe:
 
     def __init__(self, selenium, script_url):
-        self.selenium = selenium
         self.script_url = script_url
         self.inject(selenium, script_url)
 
@@ -36,7 +35,7 @@ class Axe:
         """
         command = 'return axe.run('
         if context is not None:
-            command += context
+            command += '\'' + context + '\''
         if context is not None and options is not None:
             command +=','
         if options is not None:
@@ -55,7 +54,6 @@ class Axe:
         :return report: Readable report of violations.
         :rtype: string
         """
-        global string
         string = ''
         string += 'Found ' + str(len(violations)) + ' accessibility violations:'
         for i, item in enumerate(violations):
