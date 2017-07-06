@@ -1,0 +1,153 @@
+{
+    "duplicate-id": {
+        "description": "Ensures every id attribute value is unique",
+        "help": "id attribute value must be unique",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/duplicate-id?application=axeAPI",
+        "id": "duplicate-id",
+        "impact": "moderate",
+        "nodes": [
+            {
+                "all": [],
+                "any": [
+                    {
+                        "data": "mozillians-logo",
+                        "id": "duplicate-id",
+                        "impact": "moderate",
+                        "message": "Document has multiple elements with the same id attribute: mozillians-logo",
+                        "relatedNodes": [
+                            {
+                                "html": "<img id=\"mozillians-logo\" src=\"/static/mozillians/img/mozillians-logo.png\" alt=\"Mozillians\">",
+                                "target": [
+                                    "h1 > img[src$=\"mozillians-logo.png\"]"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "failureSummary": "Fix any of the following:\n  Document has multiple elements with the same id attribute: mozillians-logo",
+                "html": "<img id=\"mozillians-logo\" src=\"/static/mozillians/img/mozillians-logo.png\" alt=\"Mozillians\">",
+                "impact": "moderate",
+                "none": [],
+                "target": [
+                    "#masthead > [role=\"navigation\"] > a:nth-child(1) > img[src$=\"mozillians-logo.png\"]"
+                ]
+            }
+        ],
+        "tags": [
+            "cat.parsing",
+            "wcag2a",
+            "wcag411"
+        ]
+    },
+    "label": {
+        "description": "Ensures every form element has a label",
+        "help": "Form elements must have labels",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/2.3/label?application=axeAPI",
+        "id": "label",
+        "impact": "critical",
+        "nodes": [
+            {
+                "all": [],
+                "any": [
+                    {
+                        "data": null,
+                        "id": "aria-label",
+                        "impact": "critical",
+                        "message": "aria-label attribute does not exist or is empty",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "aria-labelledby",
+                        "impact": "critical",
+                        "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "implicit-label",
+                        "impact": "critical",
+                        "message": "Form element does not have an implicit (wrapped) <label>",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "explicit-label",
+                        "impact": "critical",
+                        "message": "Form element does not have an explicit <label>",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "non-empty-title",
+                        "impact": "critical",
+                        "message": "Element has no title attribute or the title attribute is empty",
+                        "relatedNodes": []
+                    }
+                ],
+                "failureSummary": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty",
+                "html": "<input name=\"q\" class=\"search-query\" placeholder=\"Search for people, groups and more\" maxlength=\"140\" type=\"text\">",
+                "impact": "critical",
+                "none": [],
+                "target": [
+                    "#homepage-search > input[type=\"text\"][name=\"q\"]"
+                ]
+            },
+            {
+                "all": [],
+                "any": [
+                    {
+                        "data": null,
+                        "id": "aria-label",
+                        "impact": "critical",
+                        "message": "aria-label attribute does not exist or is empty",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "aria-labelledby",
+                        "impact": "critical",
+                        "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "implicit-label",
+                        "impact": "critical",
+                        "message": "Form element does not have an implicit (wrapped) <label>",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "explicit-label",
+                        "impact": "critical",
+                        "message": "Form element does not have an explicit <label>",
+                        "relatedNodes": []
+                    },
+                    {
+                        "data": null,
+                        "id": "non-empty-title",
+                        "impact": "critical",
+                        "message": "Element has no title attribute or the title attribute is empty",
+                        "relatedNodes": []
+                    }
+                ],
+                "failureSummary": "Fix any of the following:\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty or not visible\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  Element has no title attribute or the title attribute is empty",
+                "html": "<select id=\"language\" name=\"lang\" dir=\"ltr\">",
+                "impact": "critical",
+                "none": [],
+                "target": [
+                    "#language"
+                ]
+            }
+        ],
+        "tags": [
+            "cat.forms",
+            "wcag2a",
+            "wcag332",
+            "wcag131",
+            "section508",
+            "section508.22.n"
+        ]
+    }
+}
