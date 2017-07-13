@@ -18,7 +18,7 @@ class TestAxe:
     def test_execute(self, selenium, base_url, pytestconfig):
         """Run axe against base_url and verify JSON output."""
 
-        script_url = 'src/axe.min.js'
+        script_url = './axe_selenium_python/tests/src/axe.min.js'
         selenium.get(base_url)
         axe = Axe(selenium, script_url)
         response = axe.execute(selenium)
