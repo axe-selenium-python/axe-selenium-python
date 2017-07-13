@@ -2,5 +2,5 @@ language: python
 python:
   - 2.7
   - 3.6
-install: "pip install -r axe_selenium_python/tests/requirements.txt"
+install: "pip install -r axe_selenium_python/tests/requirements/tests.txt"
 script: tox
