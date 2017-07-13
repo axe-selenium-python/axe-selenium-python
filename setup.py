@@ -19,7 +19,8 @@ setup(name='axe-selenium-python',
     author_email='kpennington@mozilla.com',
     packages=['axe_selenium_python'],
     install_requires=[
-        'pytest-selenium>=1.10.0'
+        'pytest-selenium>=1.10.0',
+        'pytest>=3.0'
     ],
     license='Mozilla Public License 2.0 (MPL 2.0)',
     keywords='axe-core selenium pytest-selenium accessibility automation mozilla')
