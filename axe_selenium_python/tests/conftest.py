@@ -4,7 +4,19 @@
 
 from datetime import datetime
 from py.xml import html
+from axe_selenium_python import Axe
 import pytest
+
+@pytest.fixture
+def script_url():
+    """Return a script URL"""
+    return './src/axe.min.js'
+
+@pytest.fixture(scope='function')
+def axe(selenium, base_url, script_url):
+    """Return an Axe instance based on context and options."""
+    selenium.get(base_url)
+    yield Axe(selenium, script_url)
 
 
 @pytest.mark.optionalhook
