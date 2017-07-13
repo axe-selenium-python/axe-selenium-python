@@ -9,7 +9,7 @@ def readme():
     with open('./README.rst') as f:
         return f.read()
 
-setup(name='axe_selenium_python',
+setup(name='axe-selenium-python',
     version='0.0.2',
     description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
