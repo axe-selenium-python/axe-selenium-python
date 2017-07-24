@@ -17,19 +17,18 @@ def test_rules(selenium, axe):
 
 
 @pytest.mark.nondestructive
-def test_execute(selenium, axe, pytestconfig):
+def test_execute(selenium, axe):
     """Run axe against base_url and verify JSON output."""
 
-    pytestconfig.data = axe.execute(selenium)
-
+    data = axe.execute(selenium)
     # convert array to dictionary
-    pytestconfig.violations = dict((k['id'], k) for k in pytestconfig.data['violations'])
+    violations = dict((k['id'], k) for k in data['violations'])
     # assert data exists
-    assert pytestconfig.data is not None, pytestconfig.data
+    assert data is not None, data
 
 
 @pytest.mark.nondestructive
-def test_write_results(base_url, axe, pytestconfig):
+def test_write_results(base_url, selenium, axe):
     """Write JSON results to file."""
     # get string of current python version
     version = 'v' + str(sys.version_info[0]) + '_' + \
@@ -40,21 +39,31 @@ def test_write_results(base_url, axe, pytestconfig):
     filename = re.sub('(\/|\.)', '_', filename)
     # create filename "examplecom-datetime-python-version.json"
     filename += '-' + time.strftime('%m-%d-%y-%X') + '-' + version + '.json'
-    axe.write_results(filename, pytestconfig.data)
+
+    data = axe.execute(selenium)
+    axe.write_results(filename, data)
     # check that file exists and is not empty
     assert os.path.exists(filename) and os.path.getsize(filename) > 0, \
         'Output file not found.'
 
 
 @pytest.mark.nondestructive
-def test_violations(axe, pytestconfig):
+def test_violations(selenium, axe):
     """Assert that no violations were found."""
-    report = axe.report(pytestconfig.violations)
-    assert len(pytestconfig.violations) == 0, report
+    data = axe.execute(selenium)
+    # convert array to dictionary
+    violations = dict((k['id'], k) for k in data['violations'])
+
+    report = axe.report(violations)
+    assert len(violations) == 0, report
 
 
 @pytest.mark.nondestructive
-def test_report(axe, pytestconfig):
+def test_report(selenium, axe):
     """Test that report exists"""
-    report = axe.report(pytestconfig.violations)
+    data = axe.execute(selenium)
+    # convert array to dictionary
+    violations = dict((k['id'], k) for k in data['violations'])
+
+    report = axe.report(violations)
     assert report is not None, report
