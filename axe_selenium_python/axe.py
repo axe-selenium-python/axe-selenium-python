@@ -56,18 +56,26 @@ class Axe:
         """
         string = ''
         string += 'Found ' + str(len(violations)) + ' accessibility violations:'
-        for i, item in enumerate(violations):
-            string += '\n' + str(i + 1) + ') ' + violations[item]['help']
-            if violations[item]['helpUrl'] is not None:
-                string += ': ' + violations[item]['helpUrl'] + '\n\n'
-
-            nodes = violations[item]['nodes']
-            for j, node in enumerate(nodes):
+        for rule in violations:
+            string += '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
+                '\n\tURL: ' + rule['helpUrl'] + \
+                '\n\tImpact Level: ' + rule['impact'] + \
+                '\n\tTags:'
+            for tag in rule['tags']:
+                string += ' ' + tag
+            string += '\n\tElements Affected:'
+            i = 1
+            for node in rule['nodes']:
                 for target in node['target']:
-                    string += target + '\t'
-
-                string += '\n\n' + node['failureSummary'] + '\n\n'
-                string += 'Impact: ' + node['impact'] + '\n'
+                    string += '\n\t' + str(i) + ') Target: ' + target
+                    i += 1
+                for item in node['all']:
+                    string += '\n\t\t' + item['message']
+                for item in node['any']:
+                    string += '\n\t\t' + item['message']
+                for item in node['none']:
+                    string += '\n\t\t' + item['message']
+            string += '\n\n\n'
 
         return string
 

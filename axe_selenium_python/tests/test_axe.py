@@ -19,11 +19,7 @@ def test_rules(selenium, axe):
 @pytest.mark.nondestructive
 def test_execute(selenium, axe):
     """Run axe against base_url and verify JSON output."""
-
     data = axe.execute(selenium)
-    # convert array to dictionary
-    violations = dict((k['id'], k) for k in data['violations'])
-    # assert data exists
     assert data is not None, data
 
 
@@ -51,19 +47,15 @@ def test_write_results(base_url, selenium, axe):
 def test_violations(selenium, axe):
     """Assert that no violations were found."""
     data = axe.execute(selenium)
-    # convert array to dictionary
-    violations = dict((k['id'], k) for k in data['violations'])
 
-    report = axe.report(violations)
-    assert len(violations) == 0, report
+    report = axe.report(data['violations'])
+    assert len(data['violations']) == 0, report
 
 
 @pytest.mark.nondestructive
 def test_report(selenium, axe):
     """Test that report exists"""
     data = axe.execute(selenium)
-    # convert array to dictionary
-    violations = dict((k['id'], k) for k in data['violations'])
 
-    report = axe.report(violations)
+    report = axe.report(data['violations'])
     assert report is not None, report
