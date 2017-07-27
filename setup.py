@@ -18,6 +18,7 @@ setup(name='axe-selenium-python',
     author='Kimberly Pennington',
     author_email='kpennington@mozilla.com',
     packages=['axe_selenium_python'],
+    package_data={'axe_selenium_python': ['src/axe.min.js'],},
     install_requires=[
         'pytest-selenium>=1.10.0',
         'pytest>=3.0'
