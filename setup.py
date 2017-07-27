@@ -7,7 +7,10 @@ from setuptools import setup
 
 def readme():
     with open('./README.rst') as f:
-        return f.read()
+        readme = f.read()
+    with open('./CHANGELOG.rst') as f:
+        log = f.read()
+    return readme + '\n\n' + log
 
 setup(name='axe-selenium-python',
     version='0.0.2',
