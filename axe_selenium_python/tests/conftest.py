@@ -7,10 +7,12 @@ from py.xml import html
 from axe_selenium_python import Axe
 import pytest
 
+
 @pytest.fixture
 def script_url():
     """Return a script URL"""
     return'./axe_selenium_python/tests/src/axe.min.js'
+
 
 @pytest.fixture(scope='function')
 def axe(selenium, base_url, script_url):

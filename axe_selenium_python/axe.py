@@ -3,9 +3,8 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
-import selenium
-import time
 import os
+
 
 class Axe:
 
@@ -38,7 +37,7 @@ class Axe:
         if context is not None:
             command += '\'' + context + '\''
         if context is not None and options is not None:
-            command +=','
+            command += ','
         if options is not None:
             command += options
         command += ').then(function(result){return result;});'
