@@ -2,16 +2,20 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import os
 from datetime import datetime
 from py.xml import html
 from axe_selenium_python import Axe
 import pytest
 
 
+HERE = os.path.dirname(__file__)
+
+
 @pytest.fixture
 def script_url():
     """Return a script URL"""
-    return'./axe_selenium_python/tests/src/axe.min.js'
+    return os.path.join(HERE, 'src', 'axe.min.js')
 
 
 @pytest.fixture(scope='function')

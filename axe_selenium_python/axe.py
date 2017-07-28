@@ -5,11 +5,13 @@
 import json
 import os
 
+_DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
+
 
 class Axe:
 
-    def __init__(self, selenium):
-        self.script_url = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
+    def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
+        self.script_url = script_url
         self.inject(selenium, self.script_url)
 
     def inject(self, selenium, script_url):
