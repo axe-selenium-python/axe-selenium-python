@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-version 0.0.274
+version 0.0.275
 ****************
 - Added usage example to README
 
