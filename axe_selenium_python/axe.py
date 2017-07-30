@@ -3,47 +3,55 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
-import selenium
-import time
 import os
 
-class Axe:
+_DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
-    def __init__(self, selenium):
-        self.script_url = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
-        self.inject(selenium, self.script_url)
 
-    def inject(self, selenium, script_url):
+class Axe(object):
+
+    def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
+        self.script_url = script_url
+        self.selenium = selenium
+        self.inject()
+
+    def inject(self):
         """
         Recursively inject aXe into all iframes and the top level document.
 
         :param script_url: location of the axe-core script.
         :type script_url: string
         """
-        selenium.execute_script(open(script_url).read())
+        with open(self.script_url) as f:
+            self.selenium.execute_script(f.read())
 
-    def get_rules(self, selenium):
+    def get_rules(self):
         """Return array of accessibility rules."""
-        response = selenium.execute_script('return axe.getRules();')
+        response = self.selenium.execute_script('return axe.getRules();')
         return response
 
-    def execute(self, selenium, context=None, options=None):
+    def execute(self, context=None, options=None):
         """
         Run axe against the current page.
 
         :param context: which part of the page to analyze and/or what to exclude.
         :param options: dictionary of aXe options.
         """
-        command = 'return axe.run('
-        if context is not None:
-            command += '\'' + context + '\''
-        if context is not None and options is not None:
-            command +=','
-        if options is not None:
-            command += options
-        command += ').then(function(result){return result;});'
+        template = 'return axe.run(%s).then(function(result){return result;});'
+        args = ''
 
-        response = selenium.execute_script(command)
+        # If context parameter is passed, add to args
+        if context is not None:
+            args += '%r' % context
+        # Add comma delimiter only if both parameters are passed
+        if context is not None and options is not None:
+            args += ','
+        # If options parameter is passed, add to args
+        if options is not None:
+            args += '%s' % options
+
+        command = template % args
+        response = self.selenium.execute_script(command)
         return response
 
     def report(self, violations):
@@ -87,6 +95,5 @@ class Axe:
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        file = open(name, 'w+')
-        file.write(json.dumps(output, indent=4))
-        file.close
+        with open(name, 'w+') as f:
+            f.write(json.dumps(output, indent=4))

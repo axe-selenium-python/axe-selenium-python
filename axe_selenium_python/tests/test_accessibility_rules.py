@@ -92,10 +92,10 @@ class TestAccessibility:
     ]
 
     @pytest.mark.nondestructive
-    def test_execute(self, selenium, axe, pytestconfig):
+    def test_execute(self, axe, pytestconfig):
         """Run axe against base_url and verify JSON output."""
 
-        pytestconfig.data = axe.execute(selenium)
+        pytestconfig.data = axe.execute()
 
         # convert array to dictionary
         pytestconfig.violations = dict((k['id'], k) for k in pytestconfig.data['violations'])

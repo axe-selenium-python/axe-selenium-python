@@ -12,42 +12,36 @@ class TestAxeConfig:
 
     @pytest.mark.nondestructive
     @pytest.mark.xfail
-    def test_mozillians_full(self, selenium, axe):
+    def test_mozillians_full(self, axe):
         """Run axe against mozillians.org and assert no violations found."""
 
-        response = axe.execute(selenium)
-
-        # convert array to dictionary
-        violations = dict((k['id'], k) for k in response['violations'])
+        response = axe.execute()
 
         # write result to file
-        axe.write_results('mozillians_full.json', violations)
+        axe.write_results('mozillians_full.json', response['violations'])
         # assert response exists
-        assert len(violations) == 0, violations
+        assert len(response['violations']) == 0, violations
 
     @pytest.mark.nondestructive
     @pytest.mark.xfail
-    def test_mozillians_context(self, selenium, axe):
+    def test_mozillians_context(self, axe):
         """Run axe against a specific element of mozillians.org."""
 
-        response = axe.execute(selenium, '#language')
-
-        # convert array to dictionary
-        violations = dict((k['id'], k) for k in response['violations'])
+        response = axe.execute('#language')
 
         # write result to file
-        axe.write_results('mozillians_context.json', violations)
+        axe.write_results('mozillians_context.json', response['violations'])
         # assert response exists
-        assert len(violations) == 0, violations
+        assert len(response['violations']) == 0, violations
 
     @pytest.mark.nondestructive
     @pytest.mark.xfail
-    def test_mozillians_search_full(self, selenium, axe):
+    def test_mozillians_search_full(self, axe):
         """
         Perform search using keystrokes, and run axe on results page.
         """
 
-        html = selenium.switch_to.active_element
+        html = axe.selenium.switch_to.active_element
         elem = html['value']
         elem.send_keys(Keys.TAB)
         elem.send_keys('mbrandt')
@@ -55,24 +49,21 @@ class TestAxeConfig:
 
         # wait for page load
         time.sleep(2)
-        response = axe.execute(selenium)
-
-        # convert array to dictionary
-        violations = dict((k['id'], k) for k in response['violations'])
+        response = axe.execute()
 
         # write result to file
-        axe.write_results('mozillians_search_full.json', violations)
+        axe.write_results('mozillians_search_full.json', response['violations'])
         # assert response exists
-        assert len(violations) == 0, violations
+        assert len(response['violations']) == 0, violations
 
     @pytest.mark.nondestructive
     @pytest.mark.xfail
-    def test_mozillians_search_context(self, selenium, axe):
+    def test_mozillians_search_context(self, axe):
         """
         Perform search using keystrokes, and run axe on single element of page.
         """
 
-        html = selenium.switch_to.active_element
+        html = axe.selenium.switch_to.active_element
         elem = html['value']
         elem.send_keys(Keys.TAB)
         elem.send_keys('mbrandt')
@@ -81,12 +72,9 @@ class TestAxeConfig:
         # wait for page load
         time.sleep(1)
 
-        response = axe.execute(selenium, '#main > p.alert > a')
-
-        # convert array to dictionary
-        violations = dict((k['id'], k) for k in response['violations'])
+        response = axe.execute('#main > p.alert > a')
 
         # write result to file
-        axe.write_results('mozillians_search_context.json', violations)
+        axe.write_results('mozillians_search_context.json', response['violations'])
         # assert response exists
-        assert len(violations) == 0, violations
+        assert len(response['violations']) == 0, violations
