@@ -10,21 +10,21 @@ import sys
 
 
 @pytest.mark.nondestructive
-def test_rules(selenium, axe):
+def test_rules(axe):
     """Assert number of rule tests matches number of available rules."""
-    rules = axe.get_rules(selenium)
+    rules = axe.get_rules()
     assert len(rules) == 58, len(rules)
 
 
 @pytest.mark.nondestructive
-def test_execute(selenium, axe):
+def test_execute(axe):
     """Run axe against base_url and verify JSON output."""
-    data = axe.execute(selenium)
+    data = axe.execute()
     assert data is not None, data
 
 
 @pytest.mark.nondestructive
-def test_write_results(base_url, selenium, axe):
+def test_write_results(base_url, axe):
     """Write JSON results to file."""
     # get string of current python version
     version = 'v' + str(sys.version_info[0]) + '_' + \
@@ -36,7 +36,7 @@ def test_write_results(base_url, selenium, axe):
     # create filename "examplecom-datetime-python-version.json"
     filename += '-' + time.strftime('%m-%d-%y-%X') + '-' + version + '.json'
 
-    data = axe.execute(selenium)
+    data = axe.execute()
     axe.write_results(filename, data)
     # check that file exists and is not empty
     assert os.path.exists(filename) and os.path.getsize(filename) > 0, \
@@ -44,18 +44,18 @@ def test_write_results(base_url, selenium, axe):
 
 
 @pytest.mark.nondestructive
-def test_violations(selenium, axe):
+def test_violations(axe):
     """Assert that no violations were found."""
-    data = axe.execute(selenium)
+    data = axe.execute()
 
     report = axe.report(data['violations'])
     assert len(data['violations']) == 0, report
 
 
 @pytest.mark.nondestructive
-def test_report(selenium, axe):
+def test_report(axe):
     """Test that report exists"""
-    data = axe.execute(selenium)
+    data = axe.execute()
 
     report = axe.report(data['violations'])
     assert report is not None, report

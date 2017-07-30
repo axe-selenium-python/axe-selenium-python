@@ -13,7 +13,7 @@ class Axe(object):
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
         self.script_url = script_url
         self.selenium = selenium
-        self.inject(self.selenium, self.script_url)
+        self.inject()
 
     def inject(self):
         """
