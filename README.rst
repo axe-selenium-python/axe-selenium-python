@@ -16,7 +16,7 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 Requirements
 ------------
 
-You will need the following prerequisites in order to use pytest-html:
+You will need the following prerequisites in order to use axe-selenium-python:
 
 - Python 2.7 or 3.6
 - pytest-selenium >= 3.0.0
