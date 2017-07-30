@@ -30,6 +30,56 @@ To install axe-selenium-python:
 
   $ pip install axe-selenium-python
 
+Usage
+-----
+To run tests using pytest-selenium (a dependency of axe-selenium-python), tests must be marked with the non-destructive pytest decorator:
+
+.. code-block:: python
+
+ @pytest.mark.nondestructive
+  def test_my_test_function:
+    . . .
+
+Test suites using axe-selenium-python must import pytest and the Axe class.
+
+Tests not using the axe pytest fixture must use the selenium pytest fixture.
+
+pytest-selenium relies on the `**base_url** <https://github.com/pytest-dev/pytest-base-url>`_ fixture, which can be set in a configuration file, or as a command line argument.
+
+Configuration File
+******************
+
+.. code-block:: ini
+
+ [pytest]
+  base_url = http://www.example.com
+
+Command Line Argument
+*********************
+
+.. code-block:: bash
+
+  $ pytest --base-url http://www.example.com
+
+Example Test Function
+*********************
+
+*test_accessibility.py*
+
+.. code-block:: python
+
+ import pytest
+  from axe_selenium_python import Axe
+
+  @pytest.mark.nondestructive
+  def test_accessibility(self, selenium):
+
+    axe = Axe(selenium)
+    response = axe.execute()
+
+    assert len(response['violations']) == 0, axe.report()
+
+
 Resources
 ---------
 
