@@ -1,11 +1,15 @@
 CHANGELOG
 ---------
-version 0.0.272
+version 0.0.274
+^^^^^^^^^^^^^^^^
+- Added usage example to README
+
+version 0.0.273
 ^^^^^^^^^^^^^^^^
 - Added selenium instance as a class attribute
 - Changed file paths to OS independent structure
 - Fixed file read operations to use with keyword
-- Added usage example to README
+
 
 version 0.0.21
 ^^^^^^^^^^^^^^
