@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+version 0.0.276
+****************
+- Added pytest-axe usage example to README
+
 version 0.0.275
 ****************
 - Added usage example to README

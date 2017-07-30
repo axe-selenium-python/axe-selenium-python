@@ -13,7 +13,7 @@ def readme():
     return readme + '\n\n' + log
 
 setup(name='axe-selenium-python',
-    version='0.0.275',
+    version='0.0.276',
     description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
     long_description=readme(),
