@@ -37,8 +37,8 @@ To run tests using pytest-selenium (a dependency of axe-selenium-python), tests 
 .. code-block:: python
 
  @pytest.mark.nondestructive
-  def test_my_test_function:
-    . . .
+ def test_my_test_function():
+   assert true
 
 Test suites using axe-selenium-python must import pytest and the Axe class.
 
@@ -68,7 +68,7 @@ Example Test Function
 
 .. code-block:: python
 
- import pytest
+  import pytest
   from axe_selenium_python import Axe
 
   @pytest.mark.nondestructive
