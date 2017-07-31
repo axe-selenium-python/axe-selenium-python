@@ -3,15 +3,18 @@ axe-selenium-python
 
 axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
 
-.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
+.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg?style=plastic
    :target: https://github.com/kimberlythegeek/axe-selenium-python/blob/master/LICENSE.txt
    :alt: License
-.. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg
+.. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg?style=plastic
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: PyPI
-.. image:: https://img.shields.io/github/issues-raw/kimberlythegeek/axe-selenium-python.svg
+.. image:: https://img.shields.io/github/issues-raw/kimberlythegeek/axe-selenium-python.svg?style=plastic
    :target: https://github.com/kimberlythegeek/axe-selenium-python/issues
    :alt: Issues
+.. image:: https://img.shields.io/pypi/wheel/axe-selenium-python.svg?style=plastic
+   :target: https://pypi.org/project/axe-selenium-python/
+   :alt: wheel
 
 Requirements
 ------------

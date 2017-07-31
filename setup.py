@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def readme():
     with open('./README.rst') as f:
@@ -13,14 +13,14 @@ def readme():
     return readme + '\n\n' + log
 
 setup(name='axe-selenium-python',
-    version='0.0.276',
+    version='0.0.2771',
     description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
     long_description=readme(),
     url='http://github.com/kimberlythegeek/axe-selenium-python',
     author='Kimberly Pennington',
     author_email='kpennington@mozilla.com',
-    packages=['axe_selenium_python'],
+    packages=find_packages(),
     package_data={'axe_selenium_python': ['src/axe.min.js'],},
     install_requires=[
         'pytest-selenium>=1.10.0',
