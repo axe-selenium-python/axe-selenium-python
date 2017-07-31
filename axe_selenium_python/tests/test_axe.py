@@ -17,13 +17,11 @@ class TestAxe:
         rules = axe.get_rules()
         assert len(rules) == 58, len(rules)
 
-
     @pytest.mark.nondestructive
     def test_execute(axe):
         """Run axe against base_url and verify JSON output."""
         data = axe.execute()
         assert data is not None, data
-
 
     @pytest.mark.nondestructive
     def test_write_results(base_url, axe):
@@ -44,7 +42,6 @@ class TestAxe:
         assert os.path.exists(filename) and os.path.getsize(filename) > 0, \
             'Output file not found.'
 
-
     @pytest.mark.nondestructive
     def test_violations(axe):
         """Assert that no violations were found."""
@@ -52,7 +49,6 @@ class TestAxe:
 
         report = axe.report(data['violations'])
         assert len(data['violations']) == 0, report
-
 
     @pytest.mark.nondestructive
     def test_report(axe):

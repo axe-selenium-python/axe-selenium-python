@@ -10,10 +10,12 @@ import pytest
 
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
+
 @pytest.fixture
 def script_url():
     """Return a script URL"""
     return _DEFAULT_SCRIPT
+
 
 @pytest.fixture(scope='function')
 def axe(selenium, base_url, script_url):
