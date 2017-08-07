@@ -5,31 +5,34 @@
 import pytest
 
 
+def report(rule):
+    # return json.dumps(rule, indent=4, sort_keys=True)
+    string = '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
+        '\n\tURL: ' + rule['helpUrl'] + \
+        '\n\tImpact Level: ' + rule['impact'] + \
+        '\n\tTags:'
+    for tag in rule['tags']:
+        string += ' ' + tag
+    string += '\n\tElements Affected:'
+    i = 1
+    for node in rule['nodes']:
+        for target in node['target']:
+            string += '\n\t' + str(i) + ') Target: ' + target
+            i += 1
+        for item in node['all']:
+            string += '\n\t\t' + item['message']
+        for item in node['any']:
+            string += '\n\t\t' + item['message']
+        for item in node['none']:
+            string += '\n\t\t' + item['message']
+    string += '\n\n\n'
+    return string
+
+
 class TestAccessibility:
 
-    def report(rule):
-        # return json.dumps(rule, indent=4, sort_keys=True)
-        string = '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
-            '\n\tURL: ' + rule['helpUrl'] + \
-            '\n\tImpact Level: ' + rule['impact'] + \
-            '\n\tTags:'
-        for tag in rule['tags']:
-            string += ' ' + tag
-        string += '\n\tElements Affected:'
-        i = 1
-        for node in rule['nodes']:
-            for target in node['target']:
-                string += '\n\t' + str(i) + ') Target: ' + target
-                i += 1
-            for item in node['all']:
-                string += '\n\t\t' + item['message']
-            for item in node['any']:
-                string += '\n\t\t' + item['message']
-            for item in node['none']:
-                string += '\n\t\t' + item['message']
-        string += '\n\n\n'
-        return string
-
+    # Acessibility Rule IDs used to generate a test for each rule
+    # https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
     _rules = [
         'accesskeys',
         'area-alt',
@@ -95,14 +98,14 @@ class TestAccessibility:
     def test_execute(self, axe, pytestconfig):
         """Run axe against base_url and verify JSON output."""
 
-        pytestconfig.data = axe.execute()
+        data = axe.execute()
 
         # convert array to dictionary
-        pytestconfig.violations = dict((k['id'], k) for k in pytestconfig.data['violations'])
+        pytestconfig.violations = dict((k['id'], k) for k in data['violations'])
         # assert data exists
-        assert pytestconfig.data is not None, pytestconfig.data
+        assert data is not None, data
 
     @pytest.mark.parametrize("rule", _rules)
     @pytest.mark.nondestructive
     def test_accessibility_rules(self, pytestconfig, rule):
-        assert rule not in pytestconfig.violations, pytestconfig.violations[rule]['help']
+        assert rule not in pytestconfig.violations, report(pytestconfig.violations[rule])
