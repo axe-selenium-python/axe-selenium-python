@@ -30,6 +30,7 @@ class TestAccessibility:
         string += '\n\n\n'
         return string
 
+# Array of Acessibility Rule IDs used to generate a test for each rule
     _rules = [
         'accesskeys',
         'area-alt',
