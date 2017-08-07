@@ -4,6 +4,7 @@
 
 import pytest
 
+
 def report(rule):
     # return json.dumps(rule, indent=4, sort_keys=True)
     string = '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
@@ -27,11 +28,11 @@ def report(rule):
     string += '\n\n\n'
     return string
 
+
 class TestAccessibility:
 
-
-# Acessibility Rule IDs used to generate a test for each rule
-# https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
+    # Acessibility Rule IDs used to generate a test for each rule
+    # https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
     _rules = [
         'accesskeys',
         'area-alt',
