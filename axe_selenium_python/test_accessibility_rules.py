@@ -28,9 +28,6 @@ def report(rule):
     string += '\n\n\n'
     return string
 
-
-class TestAccessibility:
-
     # Acessibility Rule IDs used to generate a test for each rule
     # https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
     _rules = [
@@ -93,6 +90,9 @@ class TestAccessibility:
         'video-caption',
         'video-description'
     ]
+
+
+class TestAccessibility:
 
     @pytest.mark.nondestructive
     def test_execute(self, axe, pytestconfig):
