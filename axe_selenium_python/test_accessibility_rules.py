@@ -28,84 +28,84 @@ def report(rule):
     string += '\n\n\n'
     return string
 
-    # Acessibility Rule IDs used to generate a test for each rule
-    # https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
-    _rules = [
-        'accesskeys',
-        'area-alt',
-        'aria-allowed-attr',
-        'aria-hidden-body',
-        'aria-required-attr',
-        'aria-required-children',
-        'aria-required-parent',
-        'aria-roles',
-        'aria-valid-attr-value',
-        'aria-valid-attr',
-        'audio-caption',
-        'blink',
-        'button-name',
-        'bypass',
-        'checkboxgroup',
-        'color-contrast',
-        'definition-list',
-        'dlitem',
-        'document-title',
-        'duplicate-id',
-        'empty-heading',
-        'frame-title-unique',
-        'frame-title',
-        'heading-order',
-        'hidden-content',
-        'href-no-hash',
-        'html-has-lang',
-        'html-lang-valid',
-        'image-alt',
-        'image-redundant-alt',
-        'input-image-alt',
-        'label-title-only',
-        'label',
-        'layout-table',
-        'link-in-text-block',
-        'link-name',
-        'list',
-        'listitem',
-        'marquee',
-        'meta-refresh',
-        'meta-viewport-large',
-        'meta-viewport',
-        'object-alt',
-        'p-as-heading',
-        'radiogroup',
-        'region',
-        'scope-attr-valid',
-        'server-side-image-map',
-        'skip-link',
-        'tabindex',
-        'table-duplicate-name',
-        'table-fake-caption',
-        'td-has-header',
-        'td-headers-attr',
-        'th-has-data-cells',
-        'valid-lang',
-        'video-caption',
-        'video-description'
-    ]
+
+# Acessibility Rule IDs used to generate a test for each rule
+# https://github.com/dequelabs/axe-core/blob/master/doc/rule-descriptions.md
+rules = [
+    'accesskeys',
+    'area-alt',
+    'aria-allowed-attr',
+    'aria-hidden-body',
+    'aria-required-attr',
+    'aria-required-children',
+    'aria-required-parent',
+    'aria-roles',
+    'aria-valid-attr-value',
+    'aria-valid-attr',
+    'audio-caption',
+    'blink',
+    'button-name',
+    'bypass',
+    'checkboxgroup',
+    'color-contrast',
+    'definition-list',
+    'dlitem',
+    'document-title',
+    'duplicate-id',
+    'empty-heading',
+    'frame-title-unique',
+    'frame-title',
+    'heading-order',
+    'hidden-content',
+    'href-no-hash',
+    'html-has-lang',
+    'html-lang-valid',
+    'image-alt',
+    'image-redundant-alt',
+    'input-image-alt',
+    'label-title-only',
+    'label',
+    'layout-table',
+    'link-in-text-block',
+    'link-name',
+    'list',
+    'listitem',
+    'marquee',
+    'meta-refresh',
+    'meta-viewport-large',
+    'meta-viewport',
+    'object-alt',
+    'p-as-heading',
+    'radiogroup',
+    'region',
+    'scope-attr-valid',
+    'server-side-image-map',
+    'skip-link',
+    'tabindex',
+    'table-duplicate-name',
+    'table-fake-caption',
+    'td-has-header',
+    'td-headers-attr',
+    'th-has-data-cells',
+    'valid-lang',
+    'video-caption',
+    'video-description'
+]
 
 
-class TestAccessibility:
+@pytest.mark.nondestructive
+def test_execute(self, axe, pytestconfig):
+    """Run axe against base_url and verify JSON output."""
 
-    @pytest.mark.nondestructive
-    def test_execute(self, axe, pytestconfig):
-        """Run axe against base_url and verify JSON output."""
+    data = axe.execute()
 
-        data = axe.execute()
+    # convert array to dictionary
+    pytestconfig.violations = dict((k['id'], k) for k in data['violations'])
+    # assert data exists
+    assert data is not None, data
 
-        # convert array to dictionary
-        pytestconfig.violations = dict((k['id'], k) for k in data['violations'])
-        # assert data exists
-        assert data is not None, data
 
-    @pytest.mark.parametrize("rule", _rules)
-    @pytest.mark.nondestructive
-    def test_accessibility_rules(self, pytestconfig, rule):
-        assert rule not in pytestconfig.violations, report(pytestconfig.violations[rule])
+@pytest.mark.parametrize("rule", rules)
+@pytest.mark.nondestructive
+def test_accessibility_rules(self, pytestconfig, rule):
+    assert rule not in pytestconfig.violations, report(pytestconfig.violations[rule])
