@@ -94,7 +94,7 @@ rules = [
 
 
 @pytest.mark.nondestructive
-def test_execute(self, axe, pytestconfig):
+def test_execute(axe, pytestconfig):
     """Run axe against base_url and verify JSON output."""
 
     data = axe.execute()
@@ -107,5 +107,5 @@ def test_execute(self, axe, pytestconfig):
 
 @pytest.mark.parametrize("rule", rules)
 @pytest.mark.nondestructive
-def test_accessibility_rules(self, pytestconfig, rule):
+def test_accessibility_rules(pytestconfig, rule):
     assert rule not in pytestconfig.violations, report(pytestconfig.violations[rule])
