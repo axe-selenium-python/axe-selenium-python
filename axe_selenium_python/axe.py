@@ -58,7 +58,7 @@ class Axe(object):
         Inject aXe, run against current page, and return rules & violations.
         """
         self.inject()
-        data = self.execute(context, options)
+        data = self.execute(str(context), options)
         violations = dict((k['id'], k) for k in data['violations'])
         return violations
 
