@@ -13,7 +13,6 @@ class Axe(object):
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
         self.script_url = script_url
         self.selenium = selenium
-        self.inject()
 
     def inject(self):
         """
@@ -53,6 +52,15 @@ class Axe(object):
         command = template % args
         response = self.selenium.execute_script(command)
         return response
+
+    def run(self, context=None, options=None):
+        """
+        Inject aXe, run against current page, and return rules & violations.
+        """
+        self.inject()
+        data = self.execute(context, options)
+        violations = dict((k['id'], k) for k in data['violations'])
+        return violations
 
     def report(self, violations):
         """
