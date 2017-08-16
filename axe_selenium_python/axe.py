@@ -8,6 +8,22 @@ import os
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
 
+def impact_included(rule, impact):
+    if impact == 'minor' or impact is None:
+        return True
+    elif impact == 'moderate':
+        if rule['impact'] != 'minor':
+            return True
+    elif impact == 'severe':
+        if rule['impact'] == 'severe' or rule['impact'] == 'critical':
+            return True
+    elif impact == 'critical':
+        if rule['impact'] == 'critical':
+            return True
+    else:
+        return False
+
+
 class Axe(object):
 
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
@@ -53,13 +69,13 @@ class Axe(object):
         response = self.selenium.execute_script(command)
         return response
 
-    def run(self, context=None, options=None):
+    def run(self, context=None, options=None, impact=None):
         """
         Inject aXe, run against current page, and return rules & violations.
         """
         self.inject()
         data = self.execute(context, options)
-        violations = dict((k['id'], k) for k in data['violations'])
+        violations = dict((rule['id'], rule) for rule in data['violations'] if impact_included(rule, impact))
         return violations
 
     def report(self, violations):
