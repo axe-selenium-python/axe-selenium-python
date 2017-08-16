@@ -6,7 +6,6 @@ import pytest
 
 
 def report(rule):
-    # return json.dumps(rule, indent=4, sort_keys=True)
     string = '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
         '\n\tURL: ' + rule['helpUrl'] + \
         '\n\tImpact Level: ' + rule['impact'] + \
