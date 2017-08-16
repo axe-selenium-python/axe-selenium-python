@@ -76,6 +76,7 @@ class Axe(object):
         self.inject()
         data = self.execute(context, options)
         violations = dict((rule['id'], rule) for rule in data['violations'] if impact_included(rule, impact))
+
         return violations
 
     def report(self, violations):
