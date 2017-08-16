@@ -27,6 +27,8 @@ You will need the following prerequisites in order to use axe-selenium-python:
 
 - Python 2.7 or 3.6
 - pytest-selenium >= 3.0.0
+- tox
+- geckodriver downloaded and added to your PATH
 
 Installation
 ------------
@@ -81,7 +83,7 @@ Example Test Function
 .. code-block:: python
 
   import pytest
-  from axe_selenium_python import Axe
+  import axe_selenium_python
   import pytest_axe
 
   @pytest.mark.nondestructive
