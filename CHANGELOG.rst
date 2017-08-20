@@ -1,11 +1,6 @@
 CHANGELOG
 ---------
 
-version 0.0.3
-****************
-- Added run method to Axe class to simplify the usage in existing test suites
-- run method includes the ability to set what impact level to test for: 'minor', 'moderate', 'severe', 'critical'
-
 version 0.0.276
 ****************
 - Added pytest-axe usage example to README
