@@ -6,6 +6,7 @@ import pytest
 
 
 def report(rule):
+    # return json.dumps(rule, indent=4, sort_keys=True)
     string = '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
         '\n\tURL: ' + rule['helpUrl'] + \
         '\n\tImpact Level: ' + rule['impact'] + \
@@ -95,8 +96,13 @@ rules = [
 @pytest.mark.nondestructive
 def test_execute(axe, pytestconfig):
     """Run axe against base_url and verify JSON output."""
-    pytestconfig.violations = axe.run()
-    assert pytestconfig.violations is not None, pytestconfig.violations
+
+    data = axe.execute()
+
+    # convert array to dictionary
+    pytestconfig.violations = dict((k['id'], k) for k in data['violations'])
+    # assert data exists
+    assert data is not None, data
 
 
 @pytest.mark.parametrize("rule", rules)
