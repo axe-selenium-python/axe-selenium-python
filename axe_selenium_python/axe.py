@@ -89,7 +89,7 @@ class Axe(object):
         """
         string = ''
         string += 'Found ' + str(len(violations)) + ' accessibility violations:'
-        for rule in violations:
+        for violation, rule in violations.iteritems():
             string += '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
                 '\n\tURL: ' + rule['helpUrl'] + \
                 '\n\tImpact Level: ' + rule['impact'] + \
