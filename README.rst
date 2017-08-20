@@ -52,37 +52,24 @@ Usage
 
 .. code-block:: python
 
-    import pytest
-
-    from axe_selenium_python.test_accessibility import rules, report
-
+   import pytest
 
     @pytest.mark.nondestructive
-    def test_header_run_axe(selenium, axe, pytestconfig):
-        pytestconfig.violations = axe.run('header', None, 'critical')
-        assert pytestconfig.violations is not None
+    def test_header_accessibility(selenium, base_url, axe):
+        selenium.get(base_url)
+        violations = axe.run('header', None, 'critical')
+        assert len(violations), axe.report(violations)
 
 
-    @pytest.mark.nondestructive
-    @pytest.mark.parametrize('rule', rules)
-    def test_header_accessibility(rule, pytestconfig):
-        violations = pytestconfig.violations
-        assert rule not in violations, report(violations[rule])
 
-
-The above example is currently the recommended approach. The first test runs axe
-against the selenium instance, with the context set to *<header>* and stores
-the results in pytestconfig.
-
-The second test uses pytest parametrize to generate tests for each rule in the
-provided list *rules*.
+The above example runs aXe against only the content within the *<header>* tag, and filters for violations labeled **critical**.
 
 The method **axe.run()** accepts three parameters: *context*, *options*, and
 *impact*. For more information on **context** and **options**, view the `aXe
 documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
-The third parameter, *impact*, allows you to filter violations by their impact
-level. The options are *critical*, *severe*, *moderate*, and *minor*, with the
+The third parameter, **impact**, allows you to filter violations by their impact
+level. The options are **critical**, **severe**, **moderate**, and **minor**, with the
 default value set to **None**.
 
 This will filter violations for the impact level specified, and **all violations with a higher impact level**.
