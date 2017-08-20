@@ -27,6 +27,8 @@ You will need the following prerequisites in order to use axe-selenium-python:
 
 - Python 2.7 or 3.6
 - pytest-selenium >= 3.0.0
+- tox
+- geckodriver downloaded and added to your PATH
 
 Installation
 ------------
@@ -43,70 +45,42 @@ To install pytest-axe:
 
   $ pip install pytest-axe
 
+
 Usage
------
-To run tests using pytest-selenium (a dependency of axe-selenium-python), tests must be marked with the non-destructive pytest decorator:
+------
+*test_accessibility.py*
 
 .. code-block:: python
 
- @pytest.mark.nondestructive
- def test_my_test_function():
-   assert true
+   import pytest
 
-Test suites using axe-selenium-python must import pytest and the Axe class.
+    @pytest.mark.nondestructive
+    def test_header_accessibility(selenium, base_url, axe):
+        selenium.get(base_url)
+        violations = axe.run('header', None, 'critical')
+        assert len(violations), axe.report(violations)
 
 
-pytest-selenium relies on the `base_url <https://github.com/pytest-dev/pytest-base-url>`_ fixture, which can be set in a configuration file, or as a command line argument.
 
-Configuration File
-******************
+The above example runs aXe against only the content within the *<header>* tag, and filters for violations labeled **critical**.
 
-.. code-block:: ini
+The method **axe.run()** accepts three parameters: *context*, *options*, and
+*impact*. For more information on **context** and **options**, view the `aXe
+documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
- [pytest]
-  base_url = http://www.example.com
+The third parameter, **impact**, allows you to filter violations by their impact
+level. The options are **critical**, **severe**, **moderate**, and **minor**, with the
+default value set to **None**.
+
+This will filter violations for the impact level specified, and **all violations with a higher impact level**.
 
 Command Line Argument
 *********************
 
 .. code-block:: bash
 
-  $ pytest --base-url http://www.example.com
+  $ pytest --base-url http://www.mozilla.com --driver Firefox test_accessibility.py
 
-Example Test Function
-**********************
-
-*test_accessibility.py*
-
-.. code-block:: python
-
-  import pytest
-  from axe_selenium_python import Axe
-  import pytest_axe
-
-  @pytest.mark.nondestructive
-  def test_accessibility(self, axe):
-
-    response = axe.execute()
-
-    assert len(response['violations']) == 0, axe.report()
-
-Tests not using the axe pytest fixture must use the selenium pytest fixture:
-
-*test_accessibility.py*
-
-.. code-block:: python
-
-  import pytest
-  from axe_selenium_python import Axe
-
-  @pytest.mark.nondestructive
-  def test_accessibility(self, selenium):
-
-    axe = Axe(selenium)
-    response = axe.execute()
-
-    assert len(response['violations']) == 0, axe.report()
 
 
 Resources
