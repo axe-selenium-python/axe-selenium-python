@@ -58,7 +58,7 @@ Usage
     def test_header_accessibility(selenium, base_url, axe):
         selenium.get(base_url)
         violations = axe.run('header', None, 'critical')
-        assert len(violations), axe.report(violations)
+        assert len(violations) == 0, axe.report(violations)
 
 
 
