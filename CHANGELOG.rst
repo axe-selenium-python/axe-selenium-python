@@ -1,8 +1,14 @@
 CHANGELOG
----------
+^^^^^^^^^^^^^^
+
+version 1.0.0
+**************
+- Updated usage examples in README
+- Added docstrings to methods lacking documentation
+- Removed unused files
 
 version 0.0.3
-****************
+**************
 - Added run method to Axe class to simplify the usage in existing test suites
 - run method includes the ability to set what impact level to test for: 'minor', 'moderate', 'severe', 'critical'
 
