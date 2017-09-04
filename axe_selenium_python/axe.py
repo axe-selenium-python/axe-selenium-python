@@ -8,22 +8,6 @@ import os
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
 
-def impact_included(rule, impact):
-    if impact == 'minor' or impact is None:
-        return True
-    elif impact == 'moderate':
-        if rule['impact'] != 'minor':
-            return True
-    elif impact == 'severe':
-        if rule['impact'] == 'severe' or rule['impact'] == 'critical':
-            return True
-    elif impact == 'critical':
-        if rule['impact'] == 'critical':
-            return True
-    else:
-        return False
-
-
 class Axe(object):
 
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
@@ -75,9 +59,28 @@ class Axe(object):
         """
         self.inject()
         data = self.execute(context, options)
-        violations = dict((rule['id'], rule) for rule in data['violations'] if impact_included(rule, impact))
+        violations = dict((rule['id'], rule) for rule in data['violations'] if self.impact_included(rule, impact))
 
         return violations
+
+    def impact_included(rule, impact):
+        """
+        Function to filter for violations iwht specified impact level, and all
+        violations with a higher impact level.
+        """
+        if impact == 'minor' or impact is None:
+            return True
+        elif impact == 'moderate':
+            if rule['impact'] != 'minor':
+                return True
+        elif impact == 'severe':
+            if rule['impact'] == 'severe' or rule['impact'] == 'critical':
+                return True
+        elif impact == 'critical':
+            if rule['impact'] == 'critical':
+                return True
+        else:
+            return False
 
     def report(self, violations):
         """
