@@ -17,6 +17,3 @@ assets/
 *.json
 build/
 update.sh
-
-!axe_selenium_python/tests/examples/*.json
-!axe_selenium_python/tests/examples/*.html
