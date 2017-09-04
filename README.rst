@@ -27,8 +27,11 @@ You will need the following prerequisites in order to use axe-selenium-python:
 
 - Python 2.7 or 3.6
 - pytest-selenium >= 3.0.0
+- `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
+
+Optional
+^^^^^^^^
 - tox
-- geckodriver downloaded and added to your PATH
 
 Installation
 ------------
@@ -58,14 +61,16 @@ Usage
     def test_header_accessibility(selenium, base_url, axe):
         selenium.get(base_url)
         violations = axe.run('header', None, 'critical')
-        assert len(violations) == 0, axe.report(violations)
+        assert len(violations), axe.report(violations)
 
 
 
 The above example runs aXe against only the content within the *<header>* tag, and filters for violations labeled **critical**.
 
-The method **axe.run()** accepts three parameters: *context*, *options*, and
-*impact*. For more information on **context** and **options**, view the `aXe
+The method **axe.run()** accepts three parameters: **context**, **options**, and
+**impact**.
+
+For more information on **context** and **options**, view the `aXe
 documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
 The third parameter, **impact**, allows you to filter violations by their impact
@@ -74,8 +79,7 @@ default value set to **None**.
 
 This will filter violations for the impact level specified, and **all violations with a higher impact level**.
 
-Command Line Argument
-*********************
+To run the above test you will need to specify the browser instance to be invoked, and the **base_url**.
 
 .. code-block:: bash
 
