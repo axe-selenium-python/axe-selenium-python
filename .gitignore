@@ -17,3 +17,4 @@ assets/
 *.json
 build/
 update.sh
+.idea/
