@@ -49,7 +49,6 @@ def test_write_results(base_url, axe):
 @pytest.mark.nondestructive
 def test_violations(axe):
     """Assert that no violations were found."""
-    axe.inject()
     violations = axe.run()
 
     report = axe.report(violations)
@@ -59,7 +58,6 @@ def test_violations(axe):
 @pytest.mark.nondestructive
 def test_report(axe):
     """Test that report exists"""
-    axe.inject()
     violations = axe.run()
 
     report = axe.report(violations)
