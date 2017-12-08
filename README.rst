@@ -42,13 +42,6 @@ To install axe-selenium-python:
 
   $ pip install axe-selenium-python
 
-To install pytest-axe:
-
-.. code-block:: bash
-
-  $ pip install pytest-axe
-
-
 Usage
 ------
 *test_accessibility.py*
@@ -58,8 +51,8 @@ Usage
    import pytest
 
     @pytest.mark.nondestructive
-    def test_header_accessibility(selenium, base_url, axe):
-        selenium.get(base_url)
+    def test_header_accessibility(selenium):
+        selenium.get('http://www.google.com')
         violations = axe.run('header', None, 'critical')
         assert len(violations) == 0, axe.report(violations)
 
@@ -83,7 +76,7 @@ To run the above test you will need to specify the browser instance to be invoke
 
 .. code-block:: bash
 
-  $ pytest --base-url http://www.mozilla.com --driver Firefox test_accessibility.py
+  $ pytest --driver Firefox test_accessibility.py
 
 
 
