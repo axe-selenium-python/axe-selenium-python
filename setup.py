@@ -15,7 +15,7 @@ def readme():
 
 
 setup(name='axe-selenium-python',
-      version='1.1.5',
+      version='1.1.6',
       description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
       long_description=readme(),
