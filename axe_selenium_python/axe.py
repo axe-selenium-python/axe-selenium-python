@@ -70,11 +70,8 @@ class Axe(object):
         """
         if impact == 'minor' or impact is None:
             return True
-        elif impact == 'moderate':
+        elif impact == 'serious':
             if rule['impact'] != 'minor':
-                return True
-        elif impact == 'severe':
-            if rule['impact'] == 'severe' or rule['impact'] == 'critical':
                 return True
         elif impact == 'critical':
             if rule['impact'] == 'critical':
