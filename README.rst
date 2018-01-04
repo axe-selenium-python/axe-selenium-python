@@ -3,6 +3,8 @@ axe-selenium-python
 
 axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
 
+*This version of axe-selenium-python is using axe-core@2.6.1.*
+
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg?style=plastic
    :target: https://github.com/kimberlythegeek/axe-selenium-python/blob/master/LICENSE.txt
    :alt: License
@@ -50,7 +52,7 @@ To install pytest-axe:
 
 Usage
 ------
-*test_accessibility.py*
+``test_accessibility.py``
 
 .. code-block:: python
 
@@ -63,17 +65,17 @@ Usage
 
 
 
-The above example runs aXe against only the content within the *<header>* tag, and filters for violations labeled **critical**.
+The above example runs aXe against only the content within the *<header>* tag, and filters for violations labeled ``critical``.
 
-The method **axe.run()** accepts three parameters: **context**, **options**, and
-**impact**.
+The method ``axe.run()`` accepts three parameters: ``context``, ``options``, and
+``impact``.
 
-For more information on **context** and **options**, view the `aXe
+For more information on ``context`` and ``options``, view the `aXe
 documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
-The third parameter, **impact**, allows you to filter violations by their impact
-level. The options are **critical**, **severe**, **moderate**, and **minor**, with the
-default value set to **None**.
+The third parameter, ``impact``, allows you to filter violations by their impact
+level. The options are ``'critical'``, ``'serious'`` and ``'minor'``, with the
+default value set to ``None``.
 
 This will filter violations for the impact level specified, and **all violations with a higher impact level**.
 

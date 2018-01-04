@@ -2,10 +2,17 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+from os import environ, path
 import json
-import os
+import time
+import re
 
-_DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
+_DEFAULT_SCRIPT = path.join(path.dirname(__file__), 'src', 'axe.min.js')
+
+
+def run_axe(page):
+    axe = Axe(page.selenium)
+    axe.analyze()
 
 
 class Axe(object):
@@ -65,16 +72,13 @@ class Axe(object):
 
     def impact_included(self, rule, impact):
         """
-        Function to filter for violations iwht specified impact level, and all
+        Function to filter for violations with specified impact level, and all
         violations with a higher impact level.
         """
         if impact == 'minor' or impact is None:
             return True
-        elif impact == 'moderate':
+        elif impact == 'serious':
             if rule['impact'] != 'minor':
-                return True
-        elif impact == 'severe':
-            if rule['impact'] == 'severe' or rule['impact'] == 'critical':
                 return True
         elif impact == 'critical':
             if rule['impact'] == 'critical':
@@ -125,3 +129,21 @@ class Axe(object):
         """
         with open(name, 'w+') as f:
             f.write(json.dumps(output, indent=4))
+
+    def analyze(self, context=None, options=None, impact=None):
+        """Run aXe accessibility checks, and write results to file."""
+        disabled = environ.get('ACCESSIBILITY_DISABLED')
+        if not disabled or disabled is None:
+            violations = self.run(context, options, impact)
+
+            # Format file name based on page title and current datetime.
+            t = time.strftime("%m_%d_%Y_%H:%M:%S")
+            title = self.selenium.title
+            title = re.sub('[\s\W]', '-', title)
+            title = re.sub('(-|_)+', '-', title)
+
+            # Output results only if reporting is enabled.
+            if environ.get('ACCESSIBILITY_REPORTING') == 'true':
+                # Write JSON results to file if recording enabled
+                self.write_results('results/%s_%s.json' % (title, t), violations)
+            assert len(violations) == 0, self.report(violations)

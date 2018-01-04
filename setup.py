@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def readme():
@@ -15,7 +15,7 @@ def readme():
 
 
 setup(name='axe-selenium-python',
-      version='1.1.6',
+      version='1.2.2',
       description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
       long_description=readme(),
