@@ -1,6 +1,12 @@
 CHANGELOG
 ^^^^^^^^^^^^^^
 
+version 1.2.1
+**************
+- Updated axe.min.js to latest version of axe-core
+- Modified impact_included class method to reflect changes to the aXe API:
+- There are now only 3 impact levels: 'critical', 'serious', and 'minor'
+
 version 1.0.0
 **************
 - Updated usage examples in README
