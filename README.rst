@@ -72,7 +72,7 @@ For more information on **context** and **options**, view the `aXe
 documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
 The third parameter, **impact**, allows you to filter violations by their impact
-level. The options are **critical**, **severe**, **moderate**, and **minor**, with the
+level. The options are **critical**, **serious** and **minor**, with the
 default value set to **None**.
 
 This will filter violations for the impact level specified, and **all violations with a higher impact level**.
