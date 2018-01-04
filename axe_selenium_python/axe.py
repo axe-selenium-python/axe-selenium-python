@@ -65,7 +65,7 @@ class Axe(object):
 
     def impact_included(self, rule, impact):
         """
-        Function to filter for violations iwht specified impact level, and all
+        Function to filter for violations with specified impact level, and all
         violations with a higher impact level.
         """
         if impact == 'minor' or impact is None:
