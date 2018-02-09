@@ -2,8 +2,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import json
 import os
+import json
+import time
+import re
 
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
@@ -125,3 +127,19 @@ class Axe(object):
         """
         with open(name, 'w+') as f:
             f.write(json.dumps(output, indent=4))
+
+    def analyze(self, context=None, options=None, impact=None):
+        """Run aXe accessibility checks, and write results to file."""
+        violations = self.run(context, options, impact)
+
+        # Format file name based on page title and current datetime.
+        t = time.strftime("%m_%d_%Y_%H:%M:%S")
+        title = self.selenium.title
+        title = re.sub('[\s\W]', '-', title)
+        title = re.sub('(-|_)+', '-', title)
+
+        # Output results only if reporting is enabled.
+        if os.environ.get('ACCESSIBILITY_REPORTING') == 'true':
+            # Write JSON results to file if recording enabled
+            self.write_results('results/%s_%s.json' % (title, t), violations)
+        assert len(violations) == 0, self.report(violations)
