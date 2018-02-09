@@ -9,6 +9,9 @@ import re
 
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
+def run_axe(page):
+    axe = Axe(page.selenium)
+    axe.analyze()
 
 class Axe(object):
 
