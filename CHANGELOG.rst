@@ -1,9 +1,15 @@
 CHANGELOG
 ^^^^^^^^^^^^^^
 
+version 1.2.3
+**************
+- Added the analyze method to the Axe class. This method runs accessibility checks, and writes the JSON results to file based on the page URL and the timestamp.
+- Writing results to file can be enabled by setting the environment variable ACCESSIBILITY_REPORTING=true. The files will be written to results/ directory, which must be created if it does not already exist.
+- Accessibility checks can be disabled by setting the environment variable ACCESSIBILITY_DISABLED=true.
+
 version 1.2.1
 **************
-- Updated axe.min.js to latest version of axe-core
+- Updated axe.min.js to ``axe-core@2.6.1``
 - Modified impact_included class method to reflect changes to the aXe API:
 - There are now only 3 impact levels: 'critical', 'serious', and 'minor'
 
