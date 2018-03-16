@@ -2,11 +2,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import pytest
-import re
-import time
 import os
+import re
 import sys
+import time
+
+import pytest
 
 
 @pytest.mark.nondestructive
