@@ -2,16 +2,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import os
-import re
-import sys
-import time
-
+from os import path
 import pytest
 
 
 @pytest.mark.nondestructive
-def test_rules(axe):
+def test_get_rules(axe):
     """Assert number of rule tests matches number of available rules."""
     axe.inject()
     rules = axe.get_rules()
@@ -27,39 +23,28 @@ def test_execute(axe):
 
 
 @pytest.mark.nondestructive
-def test_write_results(base_url, axe):
-    """Write JSON results to file."""
-    # get string of current python version
-    version = 'v' + str(sys.version_info[0]) + '_' + \
-        str(sys.version_info[1]) + '_' + str(sys.version_info[2])
-    # strip protocol and dots
-    filename = re.sub('(http:\/\/|https:\/\/|\.php|\.asp|\.html)', '', base_url)
-    # replace slashes with underscores
-    filename = re.sub('(\/|\.)', '_', filename)
-    # create filename "examplecom-datetime-python-version.json"
-    filename += '-' + time.strftime('%m-%d-%y-%X') + '-' + version + '.json'
-
-    axe.inject()
-    data = axe.execute()
-    axe.write_results(filename, data)
-    # check that file exists and is not empty
-    assert os.path.exists(filename) and os.path.getsize(filename) > 0, \
-        'Output file not found.'
-
-
-@pytest.mark.nondestructive
-def test_violations(axe):
-    """Assert that no violations were found."""
+def test_run(base_url, axe):
+    """Assert that run method returns results."""
     violations = axe.run()
-
-    report = axe.report(violations)
-    assert len(violations) == 0, report
+    assert violations is not None
 
 
 @pytest.mark.nondestructive
 def test_report(axe):
-    """Test that report exists"""
+    """Test that report exists."""
     violations = axe.run()
 
     report = axe.report(violations)
     assert report is not None, report
+
+
+@pytest.mark.nondestructive
+def test_write_results(base_url, axe):
+    """Assert that write results method creates a file."""
+    axe.inject()
+    data = axe.execute()
+    filename = 'results.json'
+    axe.write_results(filename, data)
+    # check that file exists and is not empty
+    assert path.exists(filename), 'Output file not found.'
+    assert path.getsize(filename) > 0, 'File contains no data.'
