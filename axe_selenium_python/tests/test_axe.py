@@ -3,6 +3,7 @@
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from os import path
+
 import pytest
 
 
@@ -11,7 +12,7 @@ def test_get_rules(axe):
     """Assert number of rule tests matches number of available rules."""
     axe.inject()
     rules = axe.get_rules()
-    assert len(rules) == 58, len(rules)
+    assert len(rules) == 60
 
 
 @pytest.mark.nondestructive
@@ -19,30 +20,30 @@ def test_execute(axe):
     """Run axe against base_url and verify JSON output."""
     axe.inject()
     data = axe.execute()
-    assert data is not None, data
+    assert data
 
 
 @pytest.mark.nondestructive
-def test_run(base_url, axe):
+def test_run(axe):
     """Assert that run method returns results."""
     violations = axe.run()
-    assert violations is not None
+    assert violations
 
 
 @pytest.mark.nondestructive
 def test_report(axe):
     """Test that report exists."""
     violations = axe.run()
-
     report = axe.report(violations)
-    assert report is not None, report
+    assert report is not None and len(report) > 0
 
 
 @pytest.mark.nondestructive
-def test_write_results(base_url, axe):
+def test_write_results(axe):
     """Assert that write results method creates a file."""
     axe.inject()
     data = axe.execute()
+
     filename = 'results.json'
     axe.write_results(filename, data)
     # check that file exists and is not empty
