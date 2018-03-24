@@ -10,7 +10,12 @@ def capabilities = [
 pipeline {
   agent any
   libraries {
-    lib('fxtest@1.10')
+    lib('fxtest@1.9')
+  }
+  options {
+    ansiColor('xterm')
+    timestamps()
+    timeout(time: 30, unit: 'MINUTES')
   }
   environment {
     PYTEST_PROCESSES = "${PYTEST_PROCESSES ?: "auto"}"
@@ -24,38 +29,39 @@ pipeline {
     SAUCELABS = credentials('SAUCELABS')
   }
   stages {
-    stage('Checkout') {
-      steps {
-        deleteDir()
-        checkout scm
-        stash 'workspace'
-      }
-    }
     stage('Lint') {
       steps {
-        deleteDir()
-        unstash 'workspace'
-        ansiColor('xterm')
-        writeCapabilities(capabilities, 'capabilities.json')
         sh "tox -e flake8"
       }
     }
     stage('Test') {
       parallel {
+        stage('py36') {
+          steps {
+            writeCapabilities(capabilities, 'capabilities.json')
+            sh "tox -e py36"
+          }
+          post {
+            always {
+              stash includes: 'results/py36.html', name: 'py36'
+              archiveArtifacts 'results/*'
+              junit 'results/*.xml'
+            }
+          }
+        }
         stage('py27') {
           steps {
-            unstash 'workspace'
-            ansiColor('xterm')
             writeCapabilities(capabilities, 'capabilities.json')
             sh "tox -e py27"
           }
-        }
-        stage('py36') {
-          steps {
-            unstash 'workspace'
-            ansiColor('xterm')
-            writeCapabilities(capabilities, 'capabilities.json')
-            sh "tox -e py36"
+          post {
+            always {
+              stash includes: 'results/py27.html', name: 'py27'
+              archiveArtifacts 'results/*'
+              junit 'results/*.xml'
+              submitToActiveData('results/py27_raw.txt')
+              submitToTreeherder('fxapom', 'T', 'Tests', 'results/*', 'results/py27_tbpl.txt')
+            }
           }
         }
       }
@@ -63,8 +69,27 @@ pipeline {
   }
   post {
     always {
-      stash includes: 'results/*', name: 'results'
-      archiveArtifacts 'results/*'
+      unstash 'py36'
+      unstash 'py27'
+      publishHTML(target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'results',
+        reportFiles: "py36.html, py27.html",
+        reportName: 'HTML Report'])
+    }
+    changed {
+      ircNotification()
+    }
+    failure {
+      emailext(
+        attachLog: true,
+        attachmentsPattern: 'results/*.html',
+        body: '$BUILD_URL\n\n$FAILED_TESTS',
+        replyTo: '$DEFAULT_REPLYTO',
+        subject: '$DEFAULT_SUBJECT',
+        to: '$DEFAULT_RECIPIENTS')
     }
   }
 }

@@ -40,7 +40,7 @@ class Axe(object):
         """
         Run axe against the current page.
 
-        :param context: which part of the page to analyze and/or what to exclude.
+        :param context: which page part(s) to analyze and/or what to exclude.
         :param options: dictionary of aXe options.
         """
         template = 'return axe.run(%s).then(function(result){return result;});'

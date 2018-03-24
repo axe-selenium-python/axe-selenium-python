@@ -42,7 +42,7 @@ def pytest_html_results_table_row(report, cells):
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
-    """Make HTML report. Use test function docstrings as description in report."""
+    """Make HTML report using test-function docstrings as description."""
     outcome = yield
     report = outcome.get_result()
     # add docstring to 'description' column
