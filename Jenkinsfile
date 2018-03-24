@@ -30,6 +30,9 @@ pipeline {
   }
   stages {
     stage('Lint') {
+      agent {
+        dockerfile true
+      }
       steps {
         sh "tox -e flake8"
       }
@@ -37,6 +40,9 @@ pipeline {
     stage('Test') {
       parallel {
         stage('py36') {
+          agent {
+            dockerfile true
+          }
           steps {
             writeCapabilities(capabilities, 'capabilities.json')
             sh "tox -e py36"
@@ -50,6 +56,9 @@ pipeline {
           }
         }
         stage('py27') {
+          agent {
+          dockerfile true
+          }
           steps {
             writeCapabilities(capabilities, 'capabilities.json')
             sh "tox -e py27"
@@ -59,8 +68,6 @@ pipeline {
               stash includes: 'results/py27.html', name: 'py27'
               archiveArtifacts 'results/*'
               junit 'results/*.xml'
-              submitToActiveData('results/py27_raw.txt')
-              submitToTreeherder('fxapom', 'T', 'Tests', 'results/*', 'results/py27_tbpl.txt')
             }
           }
         }
