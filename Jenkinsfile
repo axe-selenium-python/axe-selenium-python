@@ -76,6 +76,7 @@ pipeline {
     always {
       unstash 'py36'
       unstash 'py27'
+    }
     changed {
       ircNotification()
     }
