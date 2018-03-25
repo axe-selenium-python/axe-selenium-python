@@ -76,6 +76,13 @@ pipeline {
     always {
       unstash 'py36'
       unstash 'py27'
+      publishHTML(target: [
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'results',
+        reportFiles: "py36.html, py27.html",
+        reportName: 'HTML Report'])
     }
     changed {
       ircNotification()
