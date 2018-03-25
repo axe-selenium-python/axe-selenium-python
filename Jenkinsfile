@@ -18,7 +18,6 @@ pipeline {
     timeout(time: 30, unit: 'MINUTES')
   }
   environment {
-    PYTEST_PROCESSES = "${PYTEST_PROCESSES ?: "auto"}"
     PYTEST_ADDOPTS =
       "--tb=short " +
       "--color=yes " +
@@ -56,7 +55,7 @@ pipeline {
         }
         stage('py27') {
           agent {
-          dockerfile true
+            dockerfile true
           }
           steps {
             writeCapabilities(capabilities, 'capabilities.json')
