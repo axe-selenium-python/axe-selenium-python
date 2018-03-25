@@ -20,7 +20,6 @@ pipeline {
   environment {
     PYTEST_PROCESSES = "${PYTEST_PROCESSES ?: "auto"}"
     PYTEST_ADDOPTS =
-      "-n=${PYTEST_PROCESSES} " +
       "--tb=short " +
       "--color=yes " +
       "--driver=SauceLabs " +
@@ -78,14 +77,6 @@ pipeline {
     always {
       unstash 'py36'
       unstash 'py27'
-      publishHTML(target: [
-        allowMissing: false,
-        alwaysLinkToLastBuild: true,
-        keepAll: true,
-        reportDir: 'results',
-        reportFiles: "py36.html, py27.html",
-        reportName: 'HTML Report'])
-    }
     changed {
       ircNotification()
     }
