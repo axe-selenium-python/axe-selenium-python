@@ -8,6 +8,7 @@
 /*.egg-info
 .eggs/
 
+.pytest_cache/
 __pycache__
 .cache/
 .tox
@@ -17,3 +18,4 @@ assets/
 *.json
 build/
 update.sh
+results/
