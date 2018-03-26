@@ -9,37 +9,51 @@ def capabilities = [
 
 pipeline {
   agent any
+  libraries {
+    lib('fxtest@1.9')
+  }
+  options {
+    ansiColor('xterm')
+    timestamps()
+    timeout(time: 30, unit: 'MINUTES')
+  }
+  environment {
+    PYTEST_ADDOPTS =
+      "--tb=short " +
+      "--color=yes " +
+      "--driver=SauceLabs " +
+      "--variables=capabilities.json"
+    PULSE = credentials('PULSE')
+    SAUCELABS = credentials('SAUCELABS')
+  }
   stages {
-    stage('Checkout') {
-      steps {
-        deleteDir()
-        checkout scm
-        stash 'workspace'
-      }
-    }
     stage('Lint') {
+      agent {
+        dockerfile true
+      }
       steps {
-        deleteDir()
-        unstash 'workspace'
-        ansiColor('xterm') {
-          sh "tox -e flake8"
-        }
+        sh "tox -e flake8"
       }
     }
     stage('Test') {
-      environment {
-        SAUCELABS = credentials('SAUCELABS')
-      }
-      steps {
-        unstash 'workspace'
-        ansiColor('xterm') {
-          sh "tox"
+      parallel {
+        stage('py36') {
+          agent {
+            dockerfile true
+          }
+          steps {
+            writeCapabilities(capabilities, 'capabilities.json')
+            sh "tox -e py36"
+          }
         }
-      }
-      post {
-        always {
-          stash includes: 'results/*', name: 'results'
-          archiveArtifacts 'results/*'
+        stage('py27') {
+          agent {
+            dockerfile true
+          }
+          steps {
+            writeCapabilities(capabilities, 'capabilities.json')
+            sh "tox -e py27"
+          }
         }
       }
     }
