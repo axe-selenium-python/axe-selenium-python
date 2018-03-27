@@ -14,9 +14,9 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 .. image:: https://img.shields.io/pypi/wheel/axe-selenium-python.svg?style=for-the-badge
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: wheel
-.. image:: https://img.shields.io/travis/kimberlythegeek/axe-selenium-python.svg?style=for-the-badge
-   :target: https://travis-ci.org/kimberlythegeek/axe-selenium-python/
-   :alt: Travis
+.. .. image:: https://img.shields.io/travis/kimberlythegeek/axe-selenium-python.svg?style=for-the-badge
+..    :target: https://travis-ci.org/kimberlythegeek/axe-selenium-python/
+..    :alt: Travis
 .. image:: https://img.shields.io/github/issues-raw/kimberlythegeek/axe-selenium-python.svg?style=for-the-badge
    :target: https://github.com/kimberlythegeek/axe-selenium-python/issues
    :alt: Issues
