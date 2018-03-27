@@ -7,14 +7,6 @@ import pytest
 
 
 @pytest.mark.nondestructive
-def test_get_rules(axe):
-    """Assert number of rule tests matches number of available rules."""
-    axe.inject()
-    rules = axe.get_rules()
-    assert len(rules) == 58, len(rules)
-
-
-@pytest.mark.nondestructive
 def test_execute(axe):
     """Run axe against base_url and verify JSON output."""
     axe.inject()
@@ -23,17 +15,11 @@ def test_execute(axe):
 
 
 @pytest.mark.nondestructive
-def test_run(base_url, axe):
-    """Assert that run method returns results."""
-    violations = axe.run()
-    assert violations is not None
-
-
-@pytest.mark.nondestructive
 def test_report(axe):
     """Test that report exists."""
-    violations = axe.run()
-
+    axe.inject()
+    results = axe.execute()
+    violations = results["violations"]
     report = axe.report(violations)
     assert report is not None, report
 

@@ -1,4 +1,5 @@
-pytest==3.4.2
+pytest==3.5.0
+selenium==3.11.0
 pytest-selenium==1.12.0
 pytest-html==1.16.1
 pytest_base_url==1.4.1

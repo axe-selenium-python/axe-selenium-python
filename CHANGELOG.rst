@@ -1,6 +1,19 @@
 CHANGELOG
 ^^^^^^^^^^^^^^
 
+version 2.0.0
+**************
+- All functionalities that are not part of axe-core have been moved into a separate package, ``pytest-axe``. This includes:
+  - ``run_axe`` helper method
+  - ``get_rules`` Axe class method
+  - ``run`` Axe class method
+  - ``impact_included`` Axe class method
+  - ``analyze`` Axe class method.
+  
+The purpose of this change is to separate implementations that are specific to the Mozilla Firefox Test Engineering team, and leave the base ``axe-selenium-python`` package for a more broad use case. This package was modeled off of Deque's Java package, axe-selenium-java, and will now more closely mirror it.
+
+All functionalities can still be utilized when using ``axe-selenium-python`` in conjunction with ``pytest-axe``.
+
 version 1.2.3
 **************
 - Added the analyze method to the Axe class. This method runs accessibility checks, and writes the JSON results to file based on the page URL and the timestamp.
