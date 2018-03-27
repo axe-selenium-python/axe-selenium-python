@@ -59,16 +59,16 @@ class Axe(object):
         """
         string = ''
         string += 'Found ' + str(len(violations)) + ' accessibility violations:'
-        for violation, rule in violations.items():
-            string += '\n\n\nRule Violated:\n' + rule['id'] + ' - ' + rule['description'] + \
-                '\n\tURL: ' + rule['helpUrl'] + \
-                '\n\tImpact Level: ' + rule['impact'] + \
+        for violation in violations:
+            string += '\n\n\nRule Violated:\n' + violation['id'] + ' - ' + violation['description'] + \
+                '\n\tURL: ' + violation['helpUrl'] + \
+                '\n\tImpact Level: ' + violation['impact'] + \
                 '\n\tTags:'
-            for tag in rule['tags']:
+            for tag in violation['tags']:
                 string += ' ' + tag
             string += '\n\tElements Affected:'
             i = 1
-            for node in rule['nodes']:
+            for node in violation['nodes']:
                 for target in node['target']:
                     string += '\n\t' + str(i) + ') Target: ' + target
                     i += 1
