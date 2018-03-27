@@ -15,7 +15,7 @@ _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
 @pytest.fixture
 def script_url():
-    """Return a script URL"""
+    """Return a script URL."""
     return _DEFAULT_SCRIPT
 
 
