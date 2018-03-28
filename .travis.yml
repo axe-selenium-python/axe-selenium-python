@@ -1,0 +1,10 @@
+sudo: required
+language: python
+services:
+  docker
+env:
+  - TOXENV=flake8
+before_install: docker build -t axe-selenium-python .
+install: skip
+script:
+  - docker run -e TOXENV=$TOXENV axe-selenium-python tox
