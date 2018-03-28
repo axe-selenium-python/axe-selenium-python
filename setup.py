@@ -15,11 +15,11 @@ def readme():
 
 
 setup(name='axe-selenium-python',
-      version='2.0.0',
+      version='2.0.1',
       description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
       long_description=readme(),
-      url='http://github.com/kimberlythegeek/axe-selenium-python',
+      url='http://github.com/mozilla-services/axe-selenium-python',
       author='Kimberly Sereduck',
       author_email='ksereduck@mozilla.com',
       packages=find_packages(),
