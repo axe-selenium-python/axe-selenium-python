@@ -26,7 +26,7 @@ def test_report(axe):
 
 @pytest.mark.nondestructive
 def test_write_results(base_url, axe):
-    """Assert that write results method creates a file."""
+    """Assert that write results method creates a non-empty file."""
     axe.inject()
     data = axe.execute()
     filename = 'results.json'
