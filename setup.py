@@ -19,7 +19,7 @@ setup(name='axe-selenium-python',
       description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
       long_description=readme(),
-      url='http://github.com/kimberlythegeek/axe-selenium-python',
+      url='http://github.com/mozilla-services/axe-selenium-python',
       author='Kimberly Sereduck',
       author_email='ksereduck@mozilla.com',
       packages=find_packages(),

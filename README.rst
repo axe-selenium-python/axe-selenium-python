@@ -68,6 +68,6 @@ For more information on ``context`` and ``options``, view the `aXe documentation
 Resources
 ---------
 
-- `Issue Tracker <http://github.com/kimberlythegeek/axe-selenium-python/issues>`_
-- `Code <http://github.com/kimberlythegeek/axe-selenium-python/>`_
+- `Issue Tracker <http://github.com/mozilla-services/axe-selenium-python/issues>`_
+- `Code <http://github.com/mozilla-services/axe-selenium-python/>`_
 - `pytest-axe <http://github.com/kimberlythegeek/pytest-axe/>`_
