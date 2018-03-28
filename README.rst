@@ -6,7 +6,7 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 *This version of axe-selenium-python is using axe-core@3.0.0.*
 
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg?style=for-the-badge
-   :target: https://github.com/kimberlythegeek/axe-selenium-python/blob/master/LICENSE.txt
+   :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
    :alt: License
 .. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg?style=for-the-badge
    :target: https://pypi.org/project/axe-selenium-python/
@@ -14,8 +14,8 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 .. image:: https://img.shields.io/pypi/wheel/axe-selenium-python.svg?style=for-the-badge
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: wheel
-.. image:: https://img.shields.io/github/issues-raw/kimberlythegeek/axe-selenium-python.svg?style=for-the-badge
-   :target: https://github.com/kimberlythegeek/axe-selenium-python/issues
+.. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg?style=for-the-badge
+   :target: https://github.com/mozilla-services/axe-selenium-python/issues
    :alt: Issues
 
 
