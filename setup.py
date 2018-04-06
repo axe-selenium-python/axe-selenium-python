@@ -25,7 +25,7 @@ setup(name='axe-selenium-python',
       packages=find_packages(),
       package_data={'axe_selenium_python': ['src/axe.min.js'], },
       install_requires=[
-          'pytest-selenium>=1.10.0',
+          'selenium>=3.0.2',
           'pytest>=3.0'
       ],
       license='Mozilla Public License 2.0 (MPL 2.0)',
