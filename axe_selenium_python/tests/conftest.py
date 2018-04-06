@@ -6,9 +6,8 @@ import os
 from datetime import datetime
 
 import pytest
-from py.xml import html
-
 from axe_selenium_python import Axe
+from py.xml import html
 
 _DEFAULT_SCRIPT = os.path.join(os.path.dirname(__file__), 'src', 'axe.min.js')
 
