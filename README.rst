@@ -5,22 +5,22 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 
 *This version of axe-selenium-python is using axe-core@3.0.0.*
 
-.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg?style=for-the-badge
+.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg?style=flat-square
    :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
    :alt: License
-.. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg?style=for-the-badge
+.. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg?style=flat-square
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: PyPI
-.. image:: https://img.shields.io/travis/mozilla-services/axe-selenium-python.svg?style=for-the-badge
+.. image:: https://img.shields.io/travis/mozilla-services/axe-selenium-python.svg?style=flat-square
    :target: https://travis-ci.org/mozilla-services/axe-selenium-python
    :alt: Travis
-.. image:: https://img.shields.io/pypi/wheel/axe-selenium-python.svg?style=for-the-badge
+.. image:: https://img.shields.io/pypi/wheel/axe-selenium-python.svg?style=flat-square
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: wheel
-.. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg?style=for-the-badge
+.. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg?style=flat-square
    :target: https://github.com/mozilla-services/axe-selenium-python/issues
    :alt: Issues
-.. image:: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/python-3-shield.svg?style=for-the-badge
+.. image:: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/python-3-shield.svg?style=flat-square
    :target: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/
    :alt: Python 3
 
