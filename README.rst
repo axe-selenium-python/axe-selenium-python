@@ -71,6 +71,18 @@ The method ``axe.execute()`` accepts two parameters: ``context`` and ``options``
 
 For more information on ``context`` and ``options``, view the `aXe documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
+Contributing
+------------
+
+Fork the repository and submit PRs with bug fixes and enhancements;
+contributions are very welcome. You can run the tests using
+`Docker <https://www.docker.com/>`_:
+
+.. code-block:: bash
+
+  $ docker build -t axe-selenium-python .
+  $ docker run -it axe-selenium-python tox
+
 Resources
 ---------
 
