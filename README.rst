@@ -88,4 +88,4 @@ Resources
 
 - `Issue Tracker <http://github.com/mozilla-services/axe-selenium-python/issues>`_
 - `Code <http://github.com/mozilla-services/axe-selenium-python/>`_
-- `pytest-axe <http://github.com/kimberlythegeek/pytest-axe/>`_
+- `pytest-axe <http://github.com/mozilla-services/pytest-axe/>`_
