@@ -20,6 +20,9 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 .. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg?style=flat-square
    :target: https://github.com/mozilla-services/axe-selenium-python/issues
    :alt: Issues
+.. image:: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/shield.svg?style=flat-square
+   :target: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/
+   :alt: Updates
 .. image:: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/python-3-shield.svg?style=flat-square
    :target: https://pyup.io/repos/github/mozilla-services/axe-selenium-python/
    :alt: Python 3
