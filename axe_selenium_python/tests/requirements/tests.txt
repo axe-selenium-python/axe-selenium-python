@@ -1,4 +1,4 @@
-pytest==3.6.1
+pytest==3.6.2
 selenium==3.12.0
 pytest-selenium==1.13.0
 pytest-html==1.19.0
