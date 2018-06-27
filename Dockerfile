@@ -11,7 +11,7 @@ RUN apt-get update \
   && apt-get install -y bzip2 curl firefox git python2.7 python3.6 python3-pip \
   && rm -rf /var/lib/apt/lists/*
 
-ENV FIREFOX_VERSION=59.0
+ENV FIREFOX_VERSION=61.0
 
 RUN curl -fsSLo /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
   && apt-get -y purge firefox \
