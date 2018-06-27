@@ -13,7 +13,7 @@ pipeline {
     lib('fxtest@1.9')
   }
   triggers {
-    pollSCM(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
+    pollSCM(env.BRANCH_NAME == 'master' ? 'H/5 * * * *' : '')
     cron(env.BRANCH_NAME == 'master' ? 'H * * * *' : '')
   }
   options {
