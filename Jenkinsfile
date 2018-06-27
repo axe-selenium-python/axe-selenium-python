@@ -13,8 +13,8 @@ pipeline {
     lib('fxtest@1.9')
   }
   triggers {
-    pollSCM('H/5 * * * *')
-    cron('H H * * *')
+    pollSCM(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
+    cron(env.BRANCH_NAME == 'master' ? 'H * * * *' : '')
   }
   options {
     ansiColor('xterm')
