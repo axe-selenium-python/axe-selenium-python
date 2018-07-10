@@ -30,7 +30,7 @@ RUN curl -fsSLo /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/r
   && chmod 755 /opt/geckodriver-$GECKODRIVER_VERSION \
   && ln -fs /opt/geckodriver-$GECKODRIVER_VERSION /usr/bin/geckodriver
 
-ENV TOX_VERSION=3.0.0
+ENV TOX_VERSION=3.1.1
 RUN pip3 install tox==$TOX_VERSION
 
 ADD . /src
