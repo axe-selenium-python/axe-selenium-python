@@ -8,7 +8,7 @@ RUN apt-get update \
   && apt-get install -y software-properties-common \
   && add-apt-repository ppa:deadsnakes/ppa \
   && apt-get update \
-  && apt-get install -y bzip2 curl firefox git python2.7 python3.6 python3-pip \
+  && apt-get install -y bzip2 curl firefox git python2.7 python-dev python3.6 python3-pip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV FIREFOX_VERSION=61.0
