@@ -8,7 +8,7 @@ RUN apt-get update \
   && apt-get install -y software-properties-common \
   && add-apt-repository ppa:deadsnakes/ppa \
   && apt-get update \
-  && apt-get install -y bzip2 curl firefox git python2.7 python-dev python3.6 python3-pip \
+  && apt-get install -y bzip2 curl firefox git python2.7 python3.6 python3-pip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV FIREFOX_VERSION=61.0
@@ -30,7 +30,7 @@ RUN curl -fsSLo /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/r
   && chmod 755 /opt/geckodriver-$GECKODRIVER_VERSION \
   && ln -fs /opt/geckodriver-$GECKODRIVER_VERSION /usr/bin/geckodriver
 
-ENV TOX_VERSION=3.1.1
+ENV TOX_VERSION=3.2.0
 RUN pip3 install tox==$TOX_VERSION
 
 ADD . /src
