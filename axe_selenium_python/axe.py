@@ -3,6 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
+from io import open
 from os import path
 
 _DEFAULT_SCRIPT = path.join(path.dirname(__file__), 'src', 'axe.min.js')
@@ -21,7 +22,7 @@ class Axe(object):
         :param script_url: location of the axe-core script.
         :type script_url: string
         """
-        with open(self.script_url) as f:
+        with open(self.script_url, 'r', encoding='utf8') as f:
             self.selenium.execute_script(f.read())
 
     def execute(self, context=None, options=None):
@@ -81,12 +82,12 @@ class Axe(object):
             string += '\n\n\n'
         return string
 
-    def write_results(self, name, output):
+    def write_results(self, data, name='results.json'):
         """
         Write JSON to file with the specified name.
 
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        with open(name, 'w+') as f:
-            f.write(json.dumps(output, indent=4))
+        with open(name, 'r', encoding='utf8') as f:
+            f.write(json.dumps(data, indent=4))

@@ -5,33 +5,29 @@
 from os import path
 
 import pytest
+from selenium import webdriver
+
+from ..axe import Axe
+
+_DEFAULT_TEST_FILE = path.join(path.dirname(__file__), 'test_page.html')
+
+
+@pytest.fixture(params=('Firefox', pytest.mark.xfail('Chrome', reason="issue #118")))
+def driver(request):
+    driver = getattr(webdriver, request.param)()
+    yield driver
+    driver.close()
 
 
 @pytest.mark.nondestructive
-def test_execute(axe):
-    """Run axe against base_url and verify JSON output."""
+def test_run_axe_sample_page(driver):
+    """Run axe against sample page and verify JSON output is as expected."""
+    driver.get('file://' + _DEFAULT_TEST_FILE)
+    axe = Axe(driver)
     axe.inject()
     data = axe.execute()
-    assert data is not None, data
 
-
-@pytest.mark.nondestructive
-def test_report(axe):
-    """Test that report exists."""
-    axe.inject()
-    results = axe.execute()
-    violations = results["violations"]
-    report = axe.report(violations)
-    assert report is not None, report
-
-
-@pytest.mark.nondestructive
-def test_write_results(base_url, axe):
-    """Assert that write results method creates a non-empty file."""
-    axe.inject()
-    data = axe.execute()
-    filename = 'results.json'
-    axe.write_results(filename, data)
-    # check that file exists and is not empty
-    assert path.exists(filename), 'Output file not found.'
-    assert path.getsize(filename) > 0, 'File contains no data.'
+    assert len(data["inapplicable"]) == 46
+    assert len(data["incomplete"]) == 0
+    assert len(data["passes"]) == 7
+    assert len(data["violations"]) == 8
