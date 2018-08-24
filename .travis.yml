@@ -1,29 +1,28 @@
 sudo: required
 language: python
 services:
-  - docker
+- docker
 jobs:
   include:
-    - stage:
-      env:
-        - TOXENV=flake8
-    - stage:
-      env: TOXENV=py27
-    - stage:
-      env:
-        - TOXENV=py36
+  - stage:
+    env:
+    - TOXENV=flake8
+  - stage:
+    env: TOXENV=py27
+  - stage:
+    env:
+    - TOXENV=py36
 cache:
   pip: true
 before_install: docker build -t axe-selenium-python .
 install: skip
 script:
-  - docker run -e TOXENV=$TOXENV axe-selenium-python tox
+- docker run -e TOXENV=$TOXENV axe-selenium-python tox
 notifications:
   email: fte-ci@mozilla.com
-
 deploy:
   provider: pypi
   user: kimberlythegeek
   password:
-    secure: IA6Rv4T9AnN5ySybnA9lNChio0SnNszUKGIgzmkXIUL2tmfV9xHaLRUc+X55d3SsKSUzvbK8CGBrYx/8w7zFZ7UEqMNZQ7CuIXexMfaMMmBNCaLToTHnxNBWwtIUg2FsqM8w8dT+SDlQ3q4y5RR8pd3QXrOH321hE9DGoXeXjCHYRQprMD0OYcSaL8zRKtWuTR5GAL5Yc/oPUH6iiEQDSVDdG9jGm71DZvWVKyfupcwsS3Dg6GTxF0RZFjdLJ+2qlmxuc2dnpNsNcuHCAe99EBgXSWLTv9cAn55lMuNrWb35tlocL6IRcpg4mFosIjmt1+jdP+nwK0Z9icIAUL8b8kJFuk/9vd8q2f3A8mMLHT41IZ+/OfFSLOUwzTG6ZXRPbJpGm6ohq0RTP3+F7CfO4pg0j2iE9jXfVT5GnhEHi31brV8b3etw+n9jyEKJp2A0njmSFN6lFM2QhG0hNmt3BBXlQFvOQCRoeQokmdIvJOU3Wl4J2K8DKALqytYb4GjL0GemwqX4zrWOlAo0Tyuug8gQiINJwmf0gWZ7ed2eVoybeB9W6/ECGOnh9feY+V/WR9SCmt+UYnX5TBaAjSQQ0SlIMcKEwA+fWK48LjWjpwES9h6hjcWXfeco21ZE5hN0PBXN2U5POCCV5s4ex99n8WAS4C69wYbdecv5/hEeRYM=
+    secure: RdrIO3QXePssZ/5cTOCwOMvpx0Jv9fDehCukU5fGy22NCV6pqcHRYJVp+hmCx4Mtkk20d1zpNUHZ+7EtvWneetlAwKlt/JwpzSWldwjZOp15SITkYN/Dw8ncXSyXQwrVcgkulgRh2jKGWvcEIAQ2T6dK07hoJB7afwqoZPGWQDUk9tlp+NJJEttlcDe0bw/zGYNPB7hmG/1eAX6gREkb6rjQhiZyrypKWuy4T/jvUTlaFRETR/2si0q0Pgfccj37A0ltRX8sEiFZVANI3rAJqVfiAe8Gx/O1uTJApDF35XcsSMvbhQKUOHH/es9eXm+6H08BsMdtLnTkEYzqYGIE94bnQTiflJcrBueypLUxU7Fgq4/Kb70zRtsJplp8nbmrMoqs/dWzlwTNMC55UMlwyJkkrllwK/cUmRuI2beQPa5GSONF7uDmDAv0zZYbObima4EPqMkPM/vUVwD/kJBXwCGdMTwv1RcZjJ7gC6Mwz7jh7OZ2ybK5pWbMUlYvCS2lrWyEkDpVqXtIaxPfbhmUEtQA2U8Aa6rnfCcVbA52ohlvPWqYlm4f9QxHT4PeGC6g7grfq9G9MN8i8a+DcfOtnWFNoCNIxUCRWgUeNCcZkBon2QO5lfR8ssSVxQ9doalHlhkkR7m2tub2zCYxrwrCW/anvJ4JY0+7wfkokRVcHg4=
   distributions: sdist bdist_wheel
