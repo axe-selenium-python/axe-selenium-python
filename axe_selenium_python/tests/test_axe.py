@@ -27,7 +27,7 @@ def test_run_axe_sample_page(driver):
     axe.inject()
     data = axe.execute()
 
-    assert len(data["inapplicable"]) == 46
+    assert len(data["inapplicable"]) == 50
     assert len(data["incomplete"]) == 0
     assert len(data["passes"]) == 7
     assert len(data["violations"]) == 8
