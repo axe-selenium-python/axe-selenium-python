@@ -1,3 +1,8 @@
+FROM node:alpine
+ADD ./axe_selenium_python/package*.json ./src/axe_selenium_python/
+WORKDIR /src/axe_selenium_python
+RUN npm install
+
 FROM ubuntu:xenial
 
 ENV DEBIAN_FRONTEND=noninteractive \

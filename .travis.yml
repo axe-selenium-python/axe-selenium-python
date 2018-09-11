@@ -17,7 +17,7 @@ cache:
 before_install: docker build -t axe-selenium-python .
 install: skip
 script:
-  - docker run -e TOXENV=$TOXENV axe-selenium-python tox
+    - docker run -e TOXENV=$TOXENV axe-selenium-python tox
 notifications:
   email: fte-ci@mozilla.com
 
