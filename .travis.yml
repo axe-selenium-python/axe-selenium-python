@@ -20,7 +20,6 @@ script:
     - docker run -e TOXENV=$TOXENV axe-selenium-python tox
 notifications:
   email: fte-ci@mozilla.com
-
 deploy:
   provider: pypi
   user: kimberlythegeek
