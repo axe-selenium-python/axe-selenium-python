@@ -12,9 +12,9 @@ from ..axe import Axe
 _DEFAULT_TEST_FILE = path.join(path.dirname(__file__), 'test_page.html')
 
 
-@pytest.fixture(params=('Firefox', pytest.mark.xfail('Chrome', reason="issue #118")))
-def driver(request):
-    driver = getattr(webdriver, request.param)()
+@pytest.fixture
+def driver():
+    driver = webdriver.Firefox()
     yield driver
     driver.close()
 

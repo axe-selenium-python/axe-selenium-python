@@ -13,9 +13,6 @@ __pycache__
 .cache/
 .tox
 *.log
-*.json
 node_modules
-!axe_selenium_python/package.json
-!axe_selenium_python/package-lock.json
 build/
 update.sh
