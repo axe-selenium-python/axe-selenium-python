@@ -52,11 +52,12 @@ jobs:
         - pip install tox
 
       script: tox
-
-deploy:
-  provider: pypi
-  user: kimberlythegeek
-  password:
-    secure: LHsL91XR32/M4r5ETAvaN/vUTakYByIfdwdCw6EI59LBvSnwaSant010QIl39+uafuev57yzUC/Y+orefczjkJnG3KdQBNS0Rt/zWIMw0Dr6Fp41Vg66e5URK/FRIwK36WlWzOcd3GkrQLLaDeqnXVzDWVMuXPP9/1ssu6mvriSeLctPsmX5N6m4yZwxNtpFsTLEh+BumXiamCuqjTI0RpyqxYlUVfio0G5LWeY9rkPskrwbSbc8xhq/PMk/ecLtlAxdn8AwgjLYCAt9d6NRfgL4Yp0R+kkfUQsX1Wf8A/pBNRr8Ht8Hy4CNlnEphgao4fgVEY4dc6tZL3FXOU9jQSmbChoANlbPzDhO+nb6d/QW5vLHVDufKyRQqtFxD90XFXlWFc/0gnD6tPZhi+UEFmBMoo9ugWDnYUeBd1T3lbwKT7sOmOQS58WhDVMLxPwr2BfgItGrNsaVHmzx9v0BnxZvD5ilmvNPrad6Rcsa0N8GtNXpnbyaupWzA97bemzuLqNHOjTm6TMZWRol6lLEJsJ1MRs7xWI4DYztXzlWITH7rvf6NNyvXKe9FPV3Lfoei3k1mT8QuEh6bIEFpBKRVV0ObQVSfFQ4M4wbgDBb3CbHVqMqFHgi98mpUo9tNGm4uzZCXw3hfEQpUPugKaH+VHoaylE+MR+fOhsyVlLQluM=
-  on:
-    distributions: sdist bdist_wheel
+    - stage: deploy
+      if: tag =~ ^\d.\d.\d
+      deploy:
+        provider: pypi
+        user: kimberlythegeek
+        password:
+          secure: LHsL91XR32/M4r5ETAvaN/vUTakYByIfdwdCw6EI59LBvSnwaSant010QIl39+uafuev57yzUC/Y+orefczjkJnG3KdQBNS0Rt/zWIMw0Dr6Fp41Vg66e5URK/FRIwK36WlWzOcd3GkrQLLaDeqnXVzDWVMuXPP9/1ssu6mvriSeLctPsmX5N6m4yZwxNtpFsTLEh+BumXiamCuqjTI0RpyqxYlUVfio0G5LWeY9rkPskrwbSbc8xhq/PMk/ecLtlAxdn8AwgjLYCAt9d6NRfgL4Yp0R+kkfUQsX1Wf8A/pBNRr8Ht8Hy4CNlnEphgao4fgVEY4dc6tZL3FXOU9jQSmbChoANlbPzDhO+nb6d/QW5vLHVDufKyRQqtFxD90XFXlWFc/0gnD6tPZhi+UEFmBMoo9ugWDnYUeBd1T3lbwKT7sOmOQS58WhDVMLxPwr2BfgItGrNsaVHmzx9v0BnxZvD5ilmvNPrad6Rcsa0N8GtNXpnbyaupWzA97bemzuLqNHOjTm6TMZWRol6lLEJsJ1MRs7xWI4DYztXzlWITH7rvf6NNyvXKe9FPV3Lfoei3k1mT8QuEh6bIEFpBKRVV0ObQVSfFQ4M4wbgDBb3CbHVqMqFHgi98mpUo9tNGm4uzZCXw3hfEQpUPugKaH+VHoaylE+MR+fOhsyVlLQluM=
+        on:
+          distributions: sdist bdist_wheel
