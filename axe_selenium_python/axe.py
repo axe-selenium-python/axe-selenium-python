@@ -6,7 +6,7 @@ import json
 from io import open
 from os import path
 
-_DEFAULT_SCRIPT = path.join(path.dirname(__file__), 'src', 'axe.min.js')
+_DEFAULT_SCRIPT = path.join(path.dirname(__file__), 'node_modules', 'axe-core', 'axe.min.js')
 
 
 class Axe(object):
