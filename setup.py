@@ -9,7 +9,7 @@ with open('./README.rst') as f:
     readme = f.read()
 
 setup(name='axe-selenium-python',
-      version='2.1.0',
+      version='2.1.2',
       description='Python library to integrate axe and selenium for web \
                 accessibility testing.',
       long_description=readme,
