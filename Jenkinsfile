@@ -33,9 +33,7 @@ pipeline {
   }
   stages {
     stage('Lint') {
-      agent {
-        dockerfile true
-      }
+      agent any
       steps {
         sh "tox -e flake8"
       }
@@ -43,18 +41,14 @@ pipeline {
     stage('Test') {
       parallel {
         stage('py36') {
-          agent {
-            dockerfile true
-          }
+          agent any
           steps {
             writeCapabilities(capabilities, 'capabilities.json')
             sh "tox -e py36"
           }
         }
         stage('py27') {
-          agent {
-            dockerfile true
-          }
+          agent any
           steps {
             writeCapabilities(capabilities, 'capabilities.json')
             sh "tox -e py27"
