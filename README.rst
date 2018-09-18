@@ -117,11 +117,7 @@ version 1.2.3
 
 version 1.2.1
 **************
-<<<<<<< HEAD
-- Updated axe.min.js to ``axe-core@2.6.1``
-=======
 - Updated axe to ``axe-core@2.6.1``
->>>>>>> ba24ec56528e4458f0a5604a8d511923c943a479
 - Modified impact_included class method to reflect changes to the aXe API:
 - There are now only 3 impact levels: 'critical', 'serious', and 'minor'
 
