@@ -29,7 +29,8 @@ You will need the following prerequisites in order to use axe-selenium-python:
 
 - selenium >= 3.0.0
 - Python 2.7 or 3.6
-- `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
+- The appropriate driver for the browser you intend to use, downloaded and added to your path, e.g. geckodriver for Firefox:
+  - `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
 
 Installation
 ------------
@@ -73,12 +74,11 @@ Contributing
 
 Fork the repository and submit PRs with bug fixes and enhancements;
 contributions are very welcome. You can run the tests using
-`Docker <https://www.docker.com/>`_:
+`tox <https://tox.readthedocs.io/en/latest/>`_:
 
 .. code-block:: bash
 
-  $ docker build -t axe-selenium-python .
-  $ docker run -it axe-selenium-python tox
+  $ tox
 
 Resources
 ---------
@@ -117,7 +117,11 @@ version 1.2.3
 
 version 1.2.1
 **************
+<<<<<<< HEAD
 - Updated axe.min.js to ``axe-core@2.6.1``
+=======
+- Updated axe to ``axe-core@2.6.1``
+>>>>>>> ba24ec56528e4458f0a5604a8d511923c943a479
 - Modified impact_included class method to reflect changes to the aXe API:
 - There are now only 3 impact levels: 'critical', 'serious', and 'minor'
 
@@ -132,6 +136,7 @@ version 0.0.3
 - Added run method to Axe class to simplify the usage in existing test suites
 - run method includes the ability to set what impact level to test for: 'minor', 'moderate', 'severe', 'critical'
 
+<<<<<<< HEAD
 version 0.0.276
 ****************
 - Added pytest-axe usage example to README
@@ -141,6 +146,9 @@ version 0.0.275
 - Added usage example to README
 
 version 0.0.273
+=======
+version 0.0.28
+>>>>>>> ba24ec56528e4458f0a5604a8d511923c943a479
 ****************
 - Added selenium instance as a class attribute
 - Changed file paths to OS independent structure
