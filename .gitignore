@@ -13,8 +13,6 @@ __pycache__
 .cache/
 .tox
 *.log
-assets/
-*.json
+node_modules
 build/
 update.sh
-results/
