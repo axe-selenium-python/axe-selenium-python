@@ -9,7 +9,7 @@ from selenium import webdriver
 
 from ..axe import Axe
 
-_DEFAULT_TEST_FILE = path.join(path.dirname(__file__), 'test_page.html')
+_DEFAULT_TEST_FILE = path.join(path.dirname(__file__), "test_page.html")
 
 
 @pytest.fixture
@@ -22,7 +22,7 @@ def driver():
 @pytest.mark.nondestructive
 def test_run_axe_sample_page(driver):
     """Run axe against sample page and verify JSON output is as expected."""
-    driver.get('file://' + _DEFAULT_TEST_FILE)
+    driver.get("file://" + _DEFAULT_TEST_FILE)
     axe = Axe(driver)
     axe.inject()
     data = axe.execute()

@@ -6,11 +6,12 @@ import json
 from io import open
 from os import path
 
-_DEFAULT_SCRIPT = path.join(path.dirname(__file__), 'node_modules', 'axe-core', 'axe.min.js')
+_DEFAULT_SCRIPT = path.join(
+    path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
+)
 
 
 class Axe(object):
-
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
         self.script_url = script_url
         self.selenium = selenium
@@ -22,7 +23,7 @@ class Axe(object):
         :param script_url: location of the axe-core script.
         :type script_url: string
         """
-        with open(self.script_url, 'r', encoding='utf8') as f:
+        with open(self.script_url, "r", encoding="utf8") as f:
             self.selenium.execute_script(f.read())
 
     def execute(self, context=None, options=None):
@@ -32,18 +33,18 @@ class Axe(object):
         :param context: which page part(s) to analyze and/or what to exclude.
         :param options: dictionary of aXe options.
         """
-        template = 'return axe.run(%s).then(function(result){return result;});'
-        args = ''
+        template = "return axe.run(%s).then(function(result){return result;});"
+        args = ""
 
         # If context parameter is passed, add to args
         if context is not None:
-            args += '%r' % context
+            args += "%r" % context
         # Add comma delimiter only if both parameters are passed
         if context is not None and options is not None:
-            args += ','
+            args += ","
         # If options parameter is passed, add to args
         if options is not None:
-            args += '%s' % options
+            args += "%s" % options
 
         command = template % args
         response = self.selenium.execute_script(command)
@@ -58,36 +59,43 @@ class Axe(object):
         :return report: Readable report of violations.
         :rtype: string
         """
-        string = ''
-        string += 'Found ' + str(len(violations)) + ' accessibility violations:'
+        string = ""
+        string += "Found " + str(len(violations)) + " accessibility violations:"
         for violation in violations:
-            string += '\n\n\nRule Violated:\n' + violation['id'] + ' - ' + violation['description'] + \
-                '\n\tURL: ' + violation['helpUrl'] + \
-                '\n\tImpact Level: ' + violation['impact'] + \
-                '\n\tTags:'
-            for tag in violation['tags']:
-                string += ' ' + tag
-            string += '\n\tElements Affected:'
+            string += (
+                "\n\n\nRule Violated:\n"
+                + violation["id"]
+                + " - "
+                + violation["description"]
+                + "\n\tURL: "
+                + violation["helpUrl"]
+                + "\n\tImpact Level: "
+                + violation["impact"]
+                + "\n\tTags:"
+            )
+            for tag in violation["tags"]:
+                string += " " + tag
+            string += "\n\tElements Affected:"
             i = 1
-            for node in violation['nodes']:
-                for target in node['target']:
-                    string += '\n\t' + str(i) + ') Target: ' + target
+            for node in violation["nodes"]:
+                for target in node["target"]:
+                    string += "\n\t" + str(i) + ") Target: " + target
                     i += 1
-                for item in node['all']:
-                    string += '\n\t\t' + item['message']
-                for item in node['any']:
-                    string += '\n\t\t' + item['message']
-                for item in node['none']:
-                    string += '\n\t\t' + item['message']
-            string += '\n\n\n'
+                for item in node["all"]:
+                    string += "\n\t\t" + item["message"]
+                for item in node["any"]:
+                    string += "\n\t\t" + item["message"]
+                for item in node["none"]:
+                    string += "\n\t\t" + item["message"]
+            string += "\n\n\n"
         return string
 
-    def write_results(self, data, name='results.json'):
+    def write_results(self, data, name="results.json"):
         """
         Write JSON to file with the specified name.
 
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        with open(name, 'r', encoding='utf8') as f:
+        with open(name, "r", encoding="utf8") as f:
             f.write(json.dumps(data, indent=4))
