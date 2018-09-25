@@ -33,7 +33,8 @@ class Axe(object):
         :param context: which page part(s) to analyze and/or what to exclude.
         :param options: dictionary of aXe options.
         """
-        template = "var callback = arguments[arguments.length - 1]; axe.run(%s).then(results => callback(results))"
+        template = "var callback = arguments[arguments.length - 1];" \
+                   "axe.run(%s).then(results => callback(results))"
         args = ""
 
         # If context parameter is passed, add to args

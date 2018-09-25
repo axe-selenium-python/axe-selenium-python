@@ -18,7 +18,7 @@ def firefox_driver():
     yield driver
     driver.close()
 
-    
+
 @pytest.fixture
 def chrome_driver():
     opts = webdriver.ChromeOptions()
