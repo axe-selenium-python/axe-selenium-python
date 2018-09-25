@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from os import path
+from os import path, getenv
 
 import pytest
 from selenium import webdriver
@@ -24,7 +24,9 @@ def chrome_driver():
     opts = webdriver.ChromeOptions()
     opts.headless = True
     opts.add_argument('--no-sandbox')
-    driver = webdriver.Chrome(options=opts)
+    driver_path = getenv('CHROMEDRIVER_PATH')
+    driver = webdriver.Chrome(options=opts, executable_path=driver_path) \
+        if driver_path else webdriver.Chrome(options=opts)
     yield driver
     driver.close()
 
