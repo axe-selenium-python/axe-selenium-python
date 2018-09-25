@@ -21,7 +21,10 @@ def firefox_driver():
     
 @pytest.fixture
 def chrome_driver():
-    driver = webdriver.Chrome()
+    opts = webdriver.ChromeOptions()
+    opts.headless = True
+    opts.add_argument('--no-sandbox')
+    driver = webdriver.Chrome(options=opts)
     yield driver
     driver.close()
 
