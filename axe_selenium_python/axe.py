@@ -33,7 +33,7 @@ class Axe(object):
         :param context: which page part(s) to analyze and/or what to exclude.
         :param options: dictionary of aXe options.
         """
-        template = "return axe.run(%s).then(function(result){return result;});"
+        template = "var callback = arguments[arguments.length - 1]; axe.run(%s).then(results => callback(results))"
         args = ""
 
         # If context parameter is passed, add to args
@@ -47,7 +47,7 @@ class Axe(object):
             args += "%s" % options
 
         command = template % args
-        response = self.selenium.execute_script(command)
+        response = self.selenium.execute_async_script(command)
         return response
 
     def report(self, violations):

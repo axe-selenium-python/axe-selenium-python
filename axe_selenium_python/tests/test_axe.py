@@ -13,21 +13,44 @@ _DEFAULT_TEST_FILE = path.join(path.dirname(__file__), "test_page.html")
 
 
 @pytest.fixture
-def driver():
+def firefox_driver():
     driver = webdriver.Firefox()
+    yield driver
+    driver.close()
+
+    
+@pytest.fixture
+def chrome_driver():
+    driver = webdriver.Chrome()
     yield driver
     driver.close()
 
 
 @pytest.mark.nondestructive
-def test_run_axe_sample_page(driver):
+def test_run_axe_sample_page_firefox(firefox_driver):
     """Run axe against sample page and verify JSON output is as expected."""
-    driver.get("file://" + _DEFAULT_TEST_FILE)
-    axe = Axe(driver)
-    axe.inject()
-    data = axe.execute()
+    data = _perform_axe_run(firefox_driver)
 
     assert len(data["inapplicable"]) == 50
     assert len(data["incomplete"]) == 0
     assert len(data["passes"]) == 7
     assert len(data["violations"]) == 8
+
+
+@pytest.mark.nondestructive
+def test_run_axe_sample_page_chrome(chrome_driver):
+    """Run axe against sample page and verify JSON output is as expected."""
+    data = _perform_axe_run(chrome_driver)
+
+    assert len(data["inapplicable"]) == 50
+    assert len(data["incomplete"]) == 0
+    assert len(data["passes"]) == 7
+    assert len(data["violations"]) == 8
+
+
+def _perform_axe_run(driver):
+    driver.get("file://" + _DEFAULT_TEST_FILE)
+    axe = Axe(driver)
+    axe.inject()
+    data = axe.execute()
+    return data
