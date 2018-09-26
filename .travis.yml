@@ -21,7 +21,11 @@ jobs:
         chrome: stable
       env: TOXENV=py36 MOZ_HEADLESS=1 GECKODRIVER=0.22.0
       before_install:
-        - export CHROMEDRIVER_PATH=/tmp/google-chrome-stable/chromedriver
+        - CHROMEDRIVER_LATEST=`wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
+        - wget http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_LATEST/chromedriver_linux64.zip
+        - mkdir $HOME/chromedriver && unzip chromedriver_linux64.zip -d $HOME/chromedriver
+        - export PATH=$HOME/chromedriver:$PATH
+        - wget -O /tmp/chromedriver.tar.gz
         - wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER/geckodriver-v$GECKODRIVER-linux64.tar.gz
         - mkdir $HOME/geckodriver && tar xvf /tmp/geckodriver.tar.gz -C $HOME/geckodriver
         - export PATH=$HOME/geckodriver:$PATH
