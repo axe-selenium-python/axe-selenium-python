@@ -73,7 +73,11 @@ Contributing
 ------------
 
 Fork the repository and submit PRs with bug fixes and enhancements;
-contributions are very welcome. You can run the tests using
+contributions are very welcome.
+
+Node dependencies must be installed by running `npm install` inside the axe-selenium-python directory.
+
+You can run the tests using
 `tox <https://tox.readthedocs.io/en/latest/>`_:
 
 .. code-block:: bash
