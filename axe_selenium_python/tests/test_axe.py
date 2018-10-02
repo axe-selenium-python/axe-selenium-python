@@ -23,10 +23,13 @@ def firefox_driver():
 def chrome_driver():
     opts = webdriver.ChromeOptions()
     opts.headless = True
-    opts.add_argument('--no-sandbox')
-    driver_path = getenv('CHROMEDRIVER_PATH')
-    driver = webdriver.Chrome(options=opts, executable_path=driver_path) \
-        if driver_path else webdriver.Chrome(options=opts)
+    opts.add_argument("--no-sandbox")
+    driver_path = getenv("CHROMEDRIVER_PATH")
+    driver = (
+        webdriver.Chrome(options=opts, executable_path=driver_path)
+        if driver_path
+        else webdriver.Chrome(options=opts)
+    )
     yield driver
     driver.close()
 
