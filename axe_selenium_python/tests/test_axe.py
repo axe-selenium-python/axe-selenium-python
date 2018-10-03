@@ -4,7 +4,9 @@
 
 from os import path, getenv
 
-import json, pytest
+import json
+import pytest
+from unittest import mock
 from selenium import webdriver
 
 from ..axe import Axe
@@ -73,8 +75,8 @@ def tempdir():
     shutil.rmtree(new_dir)
 
 
-def test_write_results_to_file(firefox_driver, tempdir):
-    axe = Axe(firefox_driver)
+def test_write_results_to_file(tempdir):
+    axe = Axe(mock.MagicMock())
     data = json.dumps({"testKey": "testValue"})
     filename = path.join(tempdir, "results.json")
 
