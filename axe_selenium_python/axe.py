@@ -101,4 +101,7 @@ class Axe(object):
         :param output: JSON object.
         """
         with open(name, "w", encoding="utf8") as f:
-            f.write(json.dumps(data, indent=4))
+            try:
+                f.write(unicode(json.dumps(data, indent=4)))
+            except NameError:
+                f.write(json.dumps(data, indent=4))

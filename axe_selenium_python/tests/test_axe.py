@@ -2,11 +2,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from os import path, getenv
-
 import json
+from os import getenv, path
+
 import pytest
-from unittest import mock
 from selenium import webdriver
 
 from ..axe import Axe
@@ -70,13 +69,19 @@ def _perform_axe_run(driver):
 def tempdir():
     import tempfile
     import shutil
+
     new_dir = tempfile.mkdtemp()
     yield new_dir
     shutil.rmtree(new_dir)
 
 
 def test_write_results_to_file(tempdir):
-    axe = Axe(mock.MagicMock())
+    try:
+        from unittest.mock import MagicMock
+    except ImportError:
+        from mock import MagicMock
+
+    axe = Axe(MagicMock())
     data = json.dumps({"testKey": "testValue"})
     filename = path.join(tempdir, "results.json")
 
