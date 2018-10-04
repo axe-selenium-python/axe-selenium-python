@@ -19,7 +19,7 @@ jobs:
       addons:
         firefox: latest-nightly
         chrome: stable
-      env: TOXENV=py36 MOZ_HEADLESS=1 GECKODRIVER=0.22.0 CHROMEDRIVER=2.40
+      env: TOXENV=py36 MOZ_HEADLESS=1 GECKODRIVER=0.23.0 CHROMEDRIVER=2.40
       before_install:
         - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER/chromedriver_linux64.zip
         - mkdir $HOME/chromedriver && unzip /tmp/chromedriver.zip -d $HOME/chromedriver
@@ -41,7 +41,7 @@ jobs:
       addons:
         firefox: latest-nightly
         chrome: stable
-      env: TOXENV=py27 MOZ_HEADLESS=1 GECKODRIVER=0.22.0 CHROMEDRIVER=2.40
+      env: TOXENV=py27 MOZ_HEADLESS=1 GECKODRIVER=0.23.0 CHROMEDRIVER=2.40
       before_install:
         - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER/chromedriver_linux64.zip
         - mkdir $HOME/chromedriver && unzip /tmp/chromedriver.zip -d $HOME/chromedriver
