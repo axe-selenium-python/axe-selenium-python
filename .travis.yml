@@ -10,6 +10,17 @@ cache:
 install: pip install -r axe_selenium_python/tests/requirements/tests.txt
 script: skip
 
+_aliases:
+  - &setup
+    - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER/chromedriver_linux64.zip
+    - mkdir $HOME/chromedriver && unzip /tmp/chromedriver.zip -d $HOME/chromedriver
+    - export PATH=$HOME/chromedriver:$PATH
+    - wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER/geckodriver-v$GECKODRIVER-linux64.tar.gz
+    - mkdir $HOME/geckodriver && tar xvf /tmp/geckodriver.tar.gz -C $HOME/geckodriver
+    - export PATH=$HOME/geckodriver:$PATH
+    - firefox --version
+    - geckodriver --version
+
 jobs:
   include:
     - stage:
@@ -21,14 +32,7 @@ jobs:
         chrome: stable
       env: TOXENV=py36 MOZ_HEADLESS=1 GECKODRIVER=0.22.0 CHROMEDRIVER=2.40
       before_install:
-        - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER/chromedriver_linux64.zip
-        - mkdir $HOME/chromedriver && unzip /tmp/chromedriver.zip -d $HOME/chromedriver
-        - export PATH=$HOME/chromedriver:$PATH
-        - wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER/geckodriver-v$GECKODRIVER-linux64.tar.gz
-        - mkdir $HOME/geckodriver && tar xvf /tmp/geckodriver.tar.gz -C $HOME/geckodriver
-        - export PATH=$HOME/geckodriver:$PATH
-        - firefox --version
-        - geckodriver --version
+        <<: *setup
       install:
         - pip install tox
       before_script:
@@ -43,14 +47,7 @@ jobs:
         chrome: stable
       env: TOXENV=py27 MOZ_HEADLESS=1 GECKODRIVER=0.22.0 CHROMEDRIVER=2.40
       before_install:
-        - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER/chromedriver_linux64.zip
-        - mkdir $HOME/chromedriver && unzip /tmp/chromedriver.zip -d $HOME/chromedriver
-        - export PATH=$HOME/chromedriver:$PATH
-        - wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER/geckodriver-v$GECKODRIVER-linux64.tar.gz
-        - mkdir $HOME/geckodriver && tar xvf /tmp/geckodriver.tar.gz -C $HOME/geckodriver
-        - export PATH=$HOME/geckodriver:$PATH
-        - firefox --version
-        - geckodriver --version
+        <<: *setup
       install:
         - pip install tox
       before_script:
