@@ -65,27 +65,12 @@ def _perform_axe_run(driver):
     return data
 
 
-@pytest.fixture
-def tempdir():
-    import tempfile
-    import shutil
+def test_write_results_to_file(tmpdir, mocker):
+    axe = Axe(mocker.MagicMock())
+    data = {"testKey": "testValue"}
+    filename = path.join(str(tmpdir), "results.json")
 
-    new_dir = tempfile.mkdtemp()
-    yield new_dir
-    shutil.rmtree(new_dir)
-
-
-def test_write_results_to_file(tempdir):
-    try:
-        from unittest.mock import MagicMock
-    except ImportError:
-        from mock import MagicMock
-
-    axe = Axe(MagicMock())
-    data = json.dumps({"testKey": "testValue"})
-    filename = path.join(tempdir, "results.json")
-
-    axe.write_results(data=data, name=filename)
+    axe.write_results(data, filename)
 
     with open(filename) as f:
         actual_file_contents = json.loads(f.read())
