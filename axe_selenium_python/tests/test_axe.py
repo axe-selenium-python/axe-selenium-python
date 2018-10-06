@@ -4,7 +4,9 @@
 
 from os import path, getenv
 
+import json
 import pytest
+from unittest import mock
 from selenium import webdriver
 
 from ..axe import Axe
@@ -62,3 +64,25 @@ def _perform_axe_run(driver):
     axe.inject()
     data = axe.execute()
     return data
+
+
+@pytest.fixture
+def tempdir():
+    import tempfile
+    import shutil
+    new_dir = tempfile.mkdtemp()
+    yield new_dir
+    shutil.rmtree(new_dir)
+
+
+def test_write_results_to_file(tempdir):
+    axe = Axe(mock.MagicMock())
+    data = json.dumps({"testKey": "testValue"})
+    filename = path.join(tempdir, "results.json")
+
+    axe.write_results(data=data, name=filename)
+
+    with open(filename) as f:
+        actual_file_contents = json.loads(f.read())
+
+    assert data == actual_file_contents

@@ -100,5 +100,5 @@ class Axe(object):
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        with open(name, "r", encoding="utf8") as f:
+        with open(name, "w", encoding="utf8") as f:
             f.write(json.dumps(data, indent=4))
