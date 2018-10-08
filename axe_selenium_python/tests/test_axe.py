@@ -2,7 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from os import path, getenv
+import json
+from os import getenv, path
 
 import pytest
 from selenium import webdriver
@@ -62,3 +63,16 @@ def _perform_axe_run(driver):
     axe.inject()
     data = axe.execute()
     return data
+
+
+def test_write_results_to_file(tmpdir, mocker):
+    axe = Axe(mocker.MagicMock())
+    data = {"testKey": "testValue"}
+    filename = path.join(str(tmpdir), "results.json")
+
+    axe.write_results(data, filename)
+
+    with open(filename) as f:
+        actual_file_contents = json.loads(f.read())
+
+    assert data == actual_file_contents
