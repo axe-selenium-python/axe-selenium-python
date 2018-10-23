@@ -3,11 +3,11 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
+import os
 from io import open
-from os import path
 
-_DEFAULT_SCRIPT = path.join(
-    path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
+_DEFAULT_SCRIPT = os.path.join(
+    os.path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
 )
 
 
@@ -100,7 +100,9 @@ class Axe(object):
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        with open(name, "w", encoding="utf8") as f:
+        filepath = os.path.join(os.getcwd(), name)
+
+        with open(filepath, "w", encoding="utf8") as f:
             try:
                 f.write(unicode(json.dumps(data, indent=4)))
             except NameError:
