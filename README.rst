@@ -47,8 +47,6 @@ Usage
 
 .. code-block:: python
 
-  import pytest
-  import os
   from selenium import webdriver
   from axe_selenium_python import Axe
 
@@ -104,6 +102,7 @@ version 2.1.0
 version 2.0.0
 **************
 - All functionalities that are not part of axe-core have been moved into a separate package, ``pytest-axe``. This includes:
+
   - ``run_axe`` helper method
   - ``get_rules`` Axe class method
   - ``run`` Axe class method
