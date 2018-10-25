@@ -47,7 +47,8 @@ Usage
 
 .. code-block:: python
 
- import pytest
+  import pytest
+  import os
   from selenium import webdriver
   from axe_selenium_python import Axe
 
@@ -60,7 +61,7 @@ Usage
       # Run axe accessibility checks.
       results = axe.execute()
       # Write results to file
-      axe.write_results('a11y.json', results)
+      axe.write_results(results, 'a11y.json')
       driver.close()
       # Assert no violations are found
       assert len(results["violations"]) == 0, axe.report(results["violations"])
