@@ -20,8 +20,8 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 .. image:: https://api.dependabot.com/badges/status?host=github&repo=mozilla-services/axe-selenium-python
    :target: https://dependabot.com
    :alt: Dependabot
-.. image:: https://coveralls.io/repos/github/kimberlythegeek/axe-selenium-python/badge.svg?branch=master
-   :target: https://coveralls.io/github/kimberlythegeek/axe-selenium-python?branch=master
+.. image:: https://coveralls.io/repos/github/mozilla-services/axe-selenium-python/badge.svg?branch=master
+   :target: https://coveralls.io/github/mozilla-services/axe-selenium-python?branch=master
    :alt: Coveralls
 
 
