@@ -93,17 +93,19 @@ class Axe(object):
             string += "\n\n\n"
         return string
 
-    def write_results(self, data, name="results.json"):
+    def write_results(self, data, name):
         """
         Write JSON to file with the specified name.
 
         :param name: Name of file to be written to.
         :param output: JSON object.
         """
-        filepath = os.path.join(os.getcwd(), name)
+        filepath = os.path.abspath(name)
 
         with open(filepath, "w", encoding="utf8") as f:
             try:
                 f.write(unicode(json.dumps(data, indent=4)))
             except NameError:
                 f.write(json.dumps(data, indent=4))
+            except FileNotFoundError as fnf_error:
+                print(fnf_error)
