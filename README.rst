@@ -20,6 +20,10 @@ axe-selenium-python integrates aXe and selenium to enable automated web accessib
 .. image:: https://api.dependabot.com/badges/status?host=github&repo=mozilla-services/axe-selenium-python
    :target: https://dependabot.com
    :alt: Dependabot
+.. image:: https://coveralls.io/repos/github/mozilla-services/axe-selenium-python/badge.svg?branch=master
+   :target: https://coveralls.io/github/mozilla-services/axe-selenium-python?branch=master
+   :alt: Coveralls
+
 
 
 Requirements
@@ -30,6 +34,7 @@ You will need the following prerequisites in order to use axe-selenium-python:
 - selenium >= 3.0.0
 - Python 2.7 or 3.6
 - The appropriate driver for the browser you intend to use, downloaded and added to your path, e.g. geckodriver for Firefox:
+
   - `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
 
 Installation
