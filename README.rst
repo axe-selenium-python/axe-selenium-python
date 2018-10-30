@@ -62,14 +62,14 @@ Usage
       # Inject axe-core javascript into page.
       axe.inject()
       # Run axe accessibility checks.
-      results = axe.execute()
+      results = axe.run()
       # Write results to file
       axe.write_results(results, 'a11y.json')
       driver.close()
       # Assert no violations are found
       assert len(results["violations"]) == 0, axe.report(results["violations"])
 
-The method ``axe.execute()`` accepts two parameters: ``context`` and ``options``.
+The method ``axe.run()`` accepts two parameters: ``context`` and ``options``.
 
 For more information on ``context`` and ``options``, view the `aXe documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
 
