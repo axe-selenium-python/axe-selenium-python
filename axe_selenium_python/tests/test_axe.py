@@ -3,7 +3,7 @@
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
-from os import getenv, path
+from os import getcwd, getenv, path
 
 import pytest
 from selenium import webdriver
@@ -76,3 +76,17 @@ def test_write_results_to_file(tmpdir, mocker):
         actual_file_contents = json.loads(f.read())
 
     assert data == actual_file_contents
+
+
+def test_write_results_without_filepath(mocker):
+    axe = Axe(mocker.MagicMock())
+    data = {"testKey": "testValue"}
+    cwd = getcwd()
+    filename = path.join(cwd, "results.json")
+
+    axe.write_results(data, filename)
+    with open(filename) as f:
+        actual_file_contents = json.loads(f.read())
+
+    assert data == actual_file_contents
+    assert path.dirname(filename) == cwd
