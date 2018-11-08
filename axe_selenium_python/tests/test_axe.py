@@ -61,7 +61,7 @@ def _perform_axe_run(driver):
     driver.get("file://" + _DEFAULT_TEST_FILE)
     axe = Axe(driver)
     axe.inject()
-    data = axe.execute()
+    data = axe.run()
     return data
 
 

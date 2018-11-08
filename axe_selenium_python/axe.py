@@ -26,7 +26,7 @@ class Axe(object):
         with open(self.script_url, "r", encoding="utf8") as f:
             self.selenium.execute_script(f.read())
 
-    def execute(self, context=None, options=None):
+    def run(self, context=None, options=None):
         """
         Run axe against the current page.
 
