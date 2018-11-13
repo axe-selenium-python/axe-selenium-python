@@ -98,6 +98,12 @@ Resources
 CHANGELOG
 ^^^^^^^^^^^^^^
 
+version 2.1.5
+*************
+**Breaks backwards compatibility**:
+
+- The Axe class method ``execute`` has been renamed to ``run`` to mirror the method in the axe-core API.
+
 version 2.1.0
 **************
 - Created package.json file to maintain axe-core dependency
