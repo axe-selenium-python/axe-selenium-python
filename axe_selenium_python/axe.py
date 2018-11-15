@@ -98,7 +98,7 @@ class Axe(object):
         Write JSON to file with the specified name.
 
         :param name: Path to the file to be written to. If no path is passed
-                     a new JSON file "results.json" will be created in the 
+                     a new JSON file "results.json" will be created in the
                      current working directory.
         :param output: JSON object.
         """
