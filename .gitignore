@@ -16,3 +16,6 @@ __pycache__
 node_modules
 build/
 update.sh
+.idea
+results.json
+
