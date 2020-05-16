@@ -13,7 +13,6 @@ __pycache__
 .cache/
 .tox
 *.log
-node_modules
 build/
 update.sh
 .idea
