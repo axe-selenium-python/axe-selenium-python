@@ -4,6 +4,12 @@
 
 
 from setuptools import find_packages, setup
+from setuptools.command.build_py import build_py
+
+class NPMInstall(build_py):
+    def run(self):
+        self.run_command('npm install')
+        build_py.run(self)
 
 with open("./README.rst") as f:
     readme = f.read()
@@ -19,6 +25,9 @@ setup(
     url="https://github.com/asicsdigital/axe-selenium-python",
     author="Kimberly Sereduck/Len Khudisman",
     author_email="len.khudisman@asics.com",
+    cmdclass={
+        'npm_install': NPMInstall
+    },
     packages=find_packages(),
     package_data={
         "axe_selenium_python": [

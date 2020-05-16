@@ -1,6 +1,6 @@
 {
   "name": "axe-selenium-python",
-  "version": "0.0.1",
+  "version": "3.0.0",
   "description": "Integrate axe-core with python",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kimberlythegeek/axe-selenium-python.git"
+    "url": "git+https://github.com/asicsdigital/axe-selenium-python.git"
   },
-  "author": "Kimberly Sereduck",
+  "author": "Kimberly Sereduck/Len Khudisman",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/kimberlythegeek/axe-selenium-python/issues"
+    "url": "https://github.com/asicsdigital/axe-selenium-python/issues"
   },
-  "homepage": "https://github.com/kimberlythegeek/axe-selenium-python#readme"
+  "homepage": "https://github.com/asicsdigital/axe-selenium-python#readme"
 }
