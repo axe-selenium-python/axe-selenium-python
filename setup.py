@@ -18,7 +18,7 @@ setup(
     name="axe-selenium-python",
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
-    version="3.0.0",
+    version="3.0.1",
     description="Python library to integrate axe and selenium for web \
                 accessibility testing.",
     long_description=open("README.rst").read(),
