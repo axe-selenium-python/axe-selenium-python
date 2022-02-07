@@ -3,7 +3,9 @@ axe-selenium-python
 
 axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
 
+
 **This version of axe-selenium-python is using axe-core@4.3.5.**
+
 
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
    :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
