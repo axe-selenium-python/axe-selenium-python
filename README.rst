@@ -3,7 +3,9 @@ axe-selenium-python
 
 axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
 
-**This version of axe-selenium-python is using axe-core@3.3.2.**
+
+**This version of axe-selenium-python is using axe-core@4.3.5.**
+
 
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
    :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
@@ -158,3 +160,47 @@ version 0.0.21
 ***************
 - Fixed include of aXe API file and references to it
 - Updated README
+
+How to upgrade to new version of axe-core
+-----------------------------------------
+
+- Updates to axe-selenium-python/axe_selenium_python/package.json
+    - Update the dependencies to the needed version of axe core
+    - Example code below
+
+.. code-block:: bash
+
+    "dependencies": {
+        "axe-core": ">=4.3.5"
+    }
+
+
+- Updates to axe-selenium-python/axe_selenium_python/package-lock.json
+    - In the axe-core blob, update version and resolved to the version needed.
+    - Navigate to registry using https://registry.npmjs.org/axe-core/ and search for resolved .tgz and copy the integrity key.
+        and update in package-lock.json file
+    - Example code below
+
+.. code-block:: bash
+
+    "axe-core": {
+      "version": "4.3.5",
+      "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.3.5.tgz",
+      "integrity": "sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA=="
+    }
+
+- Get the latest axe.min.js
+    - cd into axe-selenium-python/axe_selenium_python
+    - Run `npm install` inside the axe-selenium-python directory.
+    - Copy axe-selenium-python/axe_selenium_python/node_modules/axe-core/axe.min.js file and replace
+        axe-selenium-python/axe_selenium_python/tests/src/axe.min.js.
+    - Open axe-selenium-python/axe_selenium_python/tests/src/axe.min.js file and validate the needed version is available.
+    - Delete the axe-selenium-python/axe_selenium_python/node_modules folder.
+
+- Push the branch up and PR.
+- To test, add the below to a req.txt file and try to pip install. Validate that axe-selenium-python/axe_selenium_python/tests/src/axe.min.js file
+    is pointing to the needed version. Also compare the web plugin and automated test results should match.
+
+.. code-block:: bash
+
+    axe-selenium-python @ git+https://github.com/QualityEnablement/axe-selenium-python.git@PR_111#egg=axe-selenium-python
