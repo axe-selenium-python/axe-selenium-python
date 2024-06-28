@@ -1,2 +1,2 @@
-include README.rst axe_selenium_python/node_modules/axe-core/axe.min.js axe_selenium_python/tests/test_page.html
+include LICENSE.txt README.rst axe_selenium_python/node_modules/axe-core/axe.min.js axe_selenium_python/tests/test_page.html
 recursive-include *.rst *.txt
