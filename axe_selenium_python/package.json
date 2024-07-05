@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/kimberlythegeek/axe-selenium-python#readme",
   "dependencies": {
-    "axe-core": ">=4.3.5"
+    "axe-core": ">=4.9.1"
   }
 }
