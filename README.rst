@@ -1,206 +1,190 @@
-axe-selenium-python
-====================
+# axe-core
 
-axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
+[![License](https://img.shields.io/npm/l/axe-core.svg)](LICENSE)
+[![Version](https://img.shields.io/npm/v/axe-core.svg)](https://www.npmjs.com/package/axe-core)
+[![Total npm downloads](https://img.shields.io/npm/dt/axe-core.svg)](https://www.npmjs.com/package/axe-core)
+[![Commits](https://img.shields.io/github/commit-activity/y/dequelabs/axe-core.svg)](https://github.com/dequelabs/axe-core/commits/develop)
+[![GitHub contributors](https://img.shields.io/github/contributors/dequelabs/axe-core.svg)](https://github.com/dequelabs/axe-core/graphs/contributors)
+[![Join our Slack chat](https://img.shields.io/badge/slack-chat-purple.svg?logo=slack)](https://accessibility.deque.com/axe-community)
+[![Package Quality](https://npm.packagequality.com/shield/axe-core.svg)](https://packagequality.com/#?package=axe-core)
 
+Axe is an accessibility testing engine for websites and other HTML-based user interfaces. It's fast, secure, lightweight, and was built to seamlessly integrate with any existing test environment so you can automate accessibility testing alongside your regular functional testing.
 
-**This version of axe-selenium-python is using axe-core@4.3.5.**
+[Sign up for axe news](https://hubs.ly/H0fsN0b0) to get the latest on axe features, future releases, and events.
 
+## The Accessibility Rules
 
-.. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
-   :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
-   :alt: License
-.. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg
-   :target: https://pypi.org/project/axe-selenium-python/
-   :alt: PyPI
-.. image:: https://img.shields.io/travis/mozilla-services/axe-selenium-python.svg
-   :target: https://travis-ci.org/mozilla-services/axe-selenium-python
-   :alt: Travis
-.. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg
-   :target: https://github.com/mozilla-services/axe-selenium-python/issues
-   :alt: Issues
-.. image:: https://api.dependabot.com/badges/status?host=github&repo=mozilla-services/axe-selenium-python
-   :target: https://dependabot.com
-   :alt: Dependabot
-.. image:: https://coveralls.io/repos/github/mozilla-services/axe-selenium-python/badge.svg?branch=master
-   :target: https://coveralls.io/github/mozilla-services/axe-selenium-python?branch=master
-   :alt: Coveralls
+Axe-core has different types of rules, for WCAG 2.0, 2.1, 2.2 on level A, AA and AAA as well as a number of best practices that help you identify common accessibility practices like ensuring every page has an `h1` heading, and to help you avoid "gotchas" in ARIA like where an ARIA attribute you used will get ignored. The complete list of rules, grouped WCAG level and best practice, can found in [doc/rule-descriptions.md](./doc/rule-descriptions.md).
 
+With axe-core, you can find **on average 57% of WCAG issues automatically**. Additionally, axe-core will return elements as "incomplete" where axe-core could not be certain, and manual review is needed.
 
+To catch bugs earlier in the development cycle we recommend using the [axe-linter vscode extension](https://marketplace.visualstudio.com/items?itemName=deque-systems.vscode-axe-linter). To improve test coverage even further we recommend the [intelligent guided tests](https://www.youtube.com/watch?v=AtsX0dPCG_4&feature=youtu.be&ab_channel=DequeSystems) in the [axe Extension](https://www.deque.com/axe/browser-extensions/).
 
-Requirements
-------------
+## Getting started
 
-You will need the following prerequisites in order to use axe-selenium-python:
+First download the package:
 
-- selenium >= 3.0.0
-- Python 2.7 or 3.6
-- The appropriate driver for the browser you intend to use, downloaded and added to your path, e.g. geckodriver for Firefox:
+```console
+npm install axe-core --save-dev
+```
 
-  - `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
+Now include the javascript file in each of your iframes in your fixtures or test systems:
 
-Installation
-------------
+```html
+<script src="node_modules/axe-core/axe.min.js"></script>
+```
 
-To install axe-selenium-python:
+Now insert calls at each point in your tests where a new piece of UI becomes visible or exposed:
 
-.. code-block:: bash
-
-  $ pip install axe-selenium-python
-
-
-Usage
-------
-
-.. code-block:: python
-
-  from selenium import webdriver
-  from axe_selenium_python import Axe
-
-  def test_google():
-      driver = webdriver.Firefox()
-      driver.get("http://www.google.com")
-      axe = Axe(driver)
-      # Inject axe-core javascript into page.
-      axe.inject()
-      # Run axe accessibility checks.
-      results = axe.run()
-      # Write results to file
-      axe.write_results(results, 'a11y.json')
-      driver.close()
-      # Assert no violations are found
-      assert len(results["violations"]) == 0, axe.report(results["violations"])
-
-The method ``axe.run()`` accepts two parameters: ``context`` and ``options``.
-
-For more information on ``context`` and ``options``, view the `aXe documentation here <https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-axerun>`_.
-
-Contributing
-------------
-
-Fork the repository and submit PRs with bug fixes and enhancements;
-contributions are very welcome.
-
-Node dependencies must be installed by running `npm install` inside the axe-selenium-python directory.
-
-You can run the tests using
-`tox <https://tox.readthedocs.io/en/latest/>`_:
-
-.. code-block:: bash
-
-  $ tox
-
-Resources
----------
-
-- `Issue Tracker <http://github.com/mozilla-services/axe-selenium-python/issues>`_
-- `Code <http://github.com/mozilla-services/axe-selenium-python/>`_
-- `pytest-axe <http://github.com/mozilla-services/pytest-axe/>`_
-
-CHANGELOG
-^^^^^^^^^^^^^^
-
-version 2.1.5
-*************
-**Breaks backwards compatibility**:
-
-- The Axe class method ``execute`` has been renamed to ``run`` to mirror the method in the axe-core API.
-
-version 2.1.0
-**************
-- Created package.json file to maintain axe-core dependency
-- Replaced unit tests with more meaningful integration tests
-  - included a sample html file for integration tests
-
-version 2.0.0
-**************
-- All functionalities that are not part of axe-core have been moved into a separate package, ``pytest-axe``. This includes:
-
-  - ``run_axe`` helper method
-  - ``get_rules`` Axe class method
-  - ``run`` Axe class method
-  - ``impact_included`` Axe class method
-  - ``analyze`` Axe class method.
-
-The purpose of this change is to separate implementations that are specific to the Mozilla Firefox Test Engineering team, and leave the base ``axe-selenium-python`` package for a more broad use case. This package was modeled off of Deque's Java package, axe-selenium-java, and will now more closely mirror it.
-
-All functionalities can still be utilized when using ``axe-selenium-python`` in conjunction with ``pytest-axe``.
-
-version 1.2.3
-**************
-- Added the analyze method to the Axe class. This method runs accessibility checks, and writes the JSON results to file based on the page URL and the timestamp.
-- Writing results to file can be enabled by setting the environment variable ``ACCESSIBILITY_REPORTING=true``. The files will be written to ``results/`` directory, which must be created if it does not already exist.
-- Accessibility checks can be disabled by setting the environment variable ``ACCESSIBILITY_DISABLED=true``.
-
-version 1.2.1
-**************
-- Updated axe to ``axe-core@2.6.1``
-- Modified impact_included class method to reflect changes to the aXe API:
-- There are now only 3 impact levels: 'critical', 'serious', and 'minor'
-
-version 1.0.0
-**************
-- Updated usage examples in README
-- Added docstrings to methods lacking documentation
-- Removed unused files
-
-version 0.0.3
-**************
-- Added run method to Axe class to simplify the usage in existing test suites
-- run method includes the ability to set what impact level to test for: 'minor', 'moderate', 'severe', 'critical'
-
-version 0.0.28
-****************
-- Added selenium instance as a class attribute
-- Changed file paths to OS independent structure
-- Fixed file read operations to use with keyword
-
-
-version 0.0.21
-***************
-- Fixed include of aXe API file and references to it
-- Updated README
-
-How to upgrade to new version of axe-core
------------------------------------------
-
-- Updates to axe-selenium-python/axe_selenium_python/package.json
-    - Update the dependencies to the needed version of axe core
-    - Example code below
-
-.. code-block:: bash
-
-    "dependencies": {
-        "axe-core": ">=4.3.5"
+```js
+axe
+  .run()
+  .then(results => {
+    if (results.violations.length) {
+      throw new Error('Accessibility issues found');
     }
+  })
+  .catch(err => {
+    console.error('Something bad happened:', err.message);
+  });
+```
 
+## Philosophy
 
-- Updates to axe-selenium-python/axe_selenium_python/package-lock.json
-    - In the axe-core blob, update version and resolved to the version needed.
-    - Navigate to registry using https://registry.npmjs.org/axe-core/ and search for resolved .tgz and copy the integrity key.
-        and update in package-lock.json file
-    - Example code below
+The web can only become an accessible, inclusive space if developers are empowered to take responsibility for accessibility testing and accessible coding practices.
 
-.. code-block:: bash
+Automated accessibility testing is a huge timesaver, it doesn't require special expertise, and it allows teams to focus expert resources on the accessibility issues that really need them. Unfortunately, most accessibility tools are meant to be run on sites and applications that have reached the end of the development process and often don't give clear or consistent results, causing frustration and delays just when you thought your product was ready to ship.
 
-    "axe-core": {
-      "version": "4.3.5",
-      "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.3.5.tgz",
-      "integrity": "sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA=="
+Axe was built to reflect how web development actually works. It works with all modern browsers, tools, and testing environments a dev team might use. With axe, accessibility testing can be performed as part of your unit testing, integration testing, browser testing, and any other functional testing your team already performs on a day-to-day basis. Building accessibility testing into the early development process saves time, resources, and all kinds of frustration.
+
+## About axe - our Manifesto
+
+- Axe is open source.
+- It returns zero false positives (bugs notwithstanding).
+- It's designed to work on all modern browsers and with whatever tools, frameworks, libraries and environments you use today.
+- It's actively supported by [Deque Systems](https://www.deque.com), a major accessibility vendor.
+- It integrates with your existing functional/acceptance automated tests.
+- It automatically determines which rules to run based on the evaluation context.
+- Axe supports in-memory fixtures, static fixtures, integration tests and iframes of infinite depth.
+- Axe is highly configurable.
+
+## Supported Browsers
+
+The [axe-core API](doc/API.md) fully supports the following browsers:
+
+- Microsoft Edge v40 and above
+- Google Chrome v42 and above
+- Mozilla Firefox v38 and above
+- Apple Safari v7 and above
+- Internet Explorer v11 (DEPRECATED)
+
+Support means that we will fix bugs and attempt to test each browser regularly. Only Chrome and Firefox are currently tested on every pull request.
+
+There is limited support for JSDOM. We will attempt to make all rules compatible with JSDOM but where this is not possible, we recommend turning those rules off. Currently the `color-contrast` rule is known not to work with JSDOM.
+
+We can only support environments where features are either natively supported or polyfilled correctly. We do not support the deprecated v0 Shadow DOM implementation.
+
+## Contents of the API Package
+
+The [axe-core API](doc/API.md) package consists of:
+
+- `axe.js` - the JavaScript file that should be included in your web site under test (API)
+- `axe.min.js` - a minified version of the above file
+
+## Localization
+
+Axe can be built using your local language. To do so, a localization file must be added to the `./locales` directory. This file must be named in the following manner: `<langcode>.json`. To build axe using this locale, instead of the default, run axe with the `--lang` flag, like so:
+
+`grunt build --lang=nl`
+
+or equivalently:
+
+`npm run build -- --lang=nl`
+
+This will create a new build for axe, called `axe.<lang>.js` and `axe.<lang>.min.js`. If you want to build all localized versions, simply pass in `--all-lang` instead. If you want to build multiple localized versions (but not all of them), you can pass in a comma-separated list of languages to the `--lang` flag, like `--lang=nl,ja`.
+
+To create a new translation for axe, start by running `grunt translate --lang=<langcode>`. This will create a json file in the `./locales` directory, with the default English text in it for you to translate. Alternatively, you could copy `./locales/_template.json`. We welcome any localization for axe-core. For details on how to contribute, see the Contributing section below. For details on the message syntax, see [Check Message Template](/doc/check-message-template.md).
+
+To update an existing translation file, re-run `grunt translate --lang=<langcode>`. This will add new messages used in English and remove messages which were not used in English.
+
+Additionally, locale can be applied at runtime by passing a `locale` object to `axe.configure()`. The locale object must be of the same shape as existing locales in the `./locales` directory. For example:
+
+```js
+axe.configure({
+  locale: {
+    lang: 'de',
+    rules: {
+      accesskeys: {
+        help: 'Der Wert des accesskey-Attributes muss einzigartig sein.'
+      }
+      // ...
+    },
+    checks: {
+      abstractrole: {
+        fail: 'Abstrakte ARIA-Rollen dürfen nicht direkt verwendet werden.'
+      },
+      'aria-errormessage': {
+        // Note: doT (https://github.com/olado/dot) templates are supported here.
+        fail: 'Der Wert der aria-errormessage ${data.values}` muss eine Technik verwenden, um die Message anzukündigen (z. B., aria-live, aria-describedby, role=alert, etc.).'
+      }
+      // ...
     }
+  }
+});
+```
 
-- Get the latest axe.min.js
-    - cd into axe-selenium-python/axe_selenium_python
-    - Run `npm install` inside the axe-selenium-python directory.
-    - Copy axe-selenium-python/axe_selenium_python/node_modules/axe-core/axe.min.js file and replace
-        axe-selenium-python/axe_selenium_python/tests/src/axe.min.js.
-    - Open axe-selenium-python/axe_selenium_python/tests/src/axe.min.js file and validate the needed version is available.
-    - Delete the axe-selenium-python/axe_selenium_python/node_modules folder.
+### Supported Locales
 
-- Push the branch up and PR.
-- To test, add the below to a req.txt file and try to pip install. Validate that axe-selenium-python/axe_selenium_python/tests/src/axe.min.js file
-    is pointing to the needed version. Also compare the web plugin and automated test results should match.
+Axe-core supports the following locales. Do note that since locales are contributed by our community, they are not guaranteed to include all translations needed in a release.
 
-.. code-block:: bash
+- Basque
+- Danish
+- Dutch
+- French
+- German
+- Hebrew
+- Japanese
+- Korean
+- Norwegian (Bokmål)
+- Polish
+- Portuguese (Brazilian)
+- Spanish
+- Greek
+- Italian
+- Simplified Chinese
+- Traditional Chinese
 
-    axe-selenium-python @ git+https://github.com/QualityEnablement/axe-selenium-python.git@PR_111#egg=axe-selenium-python
+## Updates & Security
+
+Axe-core has a new minor release every 3 to 5 months, which usually introduces new rules and features. We recommend scheduling time to upgrade to these versions. Security updates will be made available for minor version lines up to **18 months old**.
+
+- See [release and support](doc/release-and-support.md) for details on the frequency of releases, long-term support and recommendations on upgrading axe-core.
+- See [backward compatibility](doc/backwards-compatibility-doc.md) for details on the types of changes different releases may introduce.
+
+## Deque Trademarks Policy
+
+DEQUE, DEQUELABS, AXE®, and AXE-CORE® are trademarks of Deque Systems, Inc. Use of the Deque trademarks must be in accordance with [Deque's trademark policy](https://www.deque.com/legal/trademarks/).
+
+## Supported ARIA Roles and Attributes.
+
+Refer [axe-core ARIA support](./doc/aria-supported.md) for a complete list of ARIA supported roles and attributes by axe.
+
+## Contributing
+
+Read the [Proposing Axe-core Rules guide](./doc/rule-proposal.md)
+
+Read the [documentation on the architecture](./doc/developer-guide.md)
+
+Read the [documentation on contributing](CONTRIBUTING.md)
+
+## Projects using axe-core
+
+[List of projects using axe-core](doc/projects.md)
+
+## Acknowledgements
+
+Thanks to Marat Dulin for his [css-selector-parser](https://www.npmjs.com/package/css-selector-parser) implementation which is included for shadow DOM support. Another thank you to the [Slick Parser](https://github.com/mootools/slick/blob/master/Source/Slick.Parser.js) implementers for their contribution, we have used some of their algorithms in our shadow DOM support code. Thanks to Lea Verou and Chris Lilley for their [colorjs.io](https://colorjs.io/) library which we have used for converting between color formats.
+
+## Licenses
+
+Axe-core is distributed under the [Mozilla Public License, version 2.0](LICENSE). It comes bundled with several dependencies which are distributed under their own terms. (See [LICENSE-3RD-PARTY.txt](LICENSE-3RD-PARTY.txt))
