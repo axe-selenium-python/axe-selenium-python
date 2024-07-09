@@ -7,7 +7,7 @@ import os
 from io import open
 
 _DEFAULT_SCRIPT = os.path.join(
-    os.path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
+    os.path.dirname(__file__), "tests", "src", "axe.min.js"
 )
 
 
