@@ -4,7 +4,7 @@
   "description": "Integrate axe-core with python",
   "main": "index.js",
   "scripts": {
-    "install": "cd axe_selenium_python && npm install"
+    "install": "cd axe_selenium_python && npm install && npm ls"
   },
   "repository": {
     "type": "git",

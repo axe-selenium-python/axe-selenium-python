@@ -3,36 +3,25 @@ axe-selenium-python
 
 axe-selenium-python integrates aXe and selenium to enable automated web accessibility testing.
 
-**This version of axe-selenium-python is using axe-core@4.0.2.**
+**This version of axe-selenium-python is using axe-core@4.10.2.**
 
 .. image:: https://img.shields.io/badge/license-MPL%202.0-blue.svg
-   :target: https://github.com/mozilla-services/axe-selenium-python/blob/master/LICENSE.txt
+   :target: https://github.com/axe-selenium-python/axe-selenium-python/blob/master/LICENSE.txt
    :alt: License
 .. image:: https://img.shields.io/pypi/v/axe-selenium-python.svg
    :target: https://pypi.org/project/axe-selenium-python/
    :alt: PyPI
-.. image:: https://img.shields.io/travis/mozilla-services/axe-selenium-python.svg
-   :target: https://travis-ci.org/mozilla-services/axe-selenium-python
-   :alt: Travis
-.. image:: https://img.shields.io/github/issues-raw/mozilla-services/axe-selenium-python.svg
-   :target: https://github.com/mozilla-services/axe-selenium-python/issues
+.. image:: https://img.shields.io/github/issues-raw/axe-selenium-python/axe-selenium-python.svg
+   :target: https://github.com/axe-selenium-python/axe-selenium-python/issues
    :alt: Issues
-.. image:: https://api.dependabot.com/badges/status?host=github&repo=mozilla-services/axe-selenium-python
-   :target: https://dependabot.com
-   :alt: Dependabot
-.. image:: https://coveralls.io/repos/github/mozilla-services/axe-selenium-python/badge.svg?branch=master
-   :target: https://coveralls.io/github/mozilla-services/axe-selenium-python?branch=master
-   :alt: Coveralls
-
-
 
 Requirements
 ------------
 
 You will need the following prerequisites in order to use axe-selenium-python:
 
-- selenium >= 3.0.0
-- Python 2.7 or 3.6
+- selenium >= 4.2
+- Python 3.12+
 - The appropriate driver for the browser you intend to use, downloaded and added to your path, e.g. geckodriver for Firefox:
 
   - `geckodriver <https://github.com/mozilla/geckodriver/releases>`_ downloaded and `added to your PATH <https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path#answer-40208762>`_
@@ -88,15 +77,14 @@ You can run the tests using
 
   $ tox
 
-Resources
----------
-
-- `Issue Tracker <http://github.com/mozilla-services/axe-selenium-python/issues>`_
-- `Code <http://github.com/mozilla-services/axe-selenium-python/>`_
-- `pytest-axe <http://github.com/mozilla-services/pytest-axe/>`_
-
 CHANGELOG
 ^^^^^^^^^^^^^^
+
+version 3.0
+***********
+
+- Bumped minimum Python version to 3.12
+- Updated axe to ``axe-core@4.10.2``
 
 version 2.1.5
 *************

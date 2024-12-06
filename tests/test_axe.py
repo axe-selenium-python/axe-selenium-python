@@ -8,7 +8,7 @@ from os import getcwd, getenv, path
 import pytest
 from selenium import webdriver
 
-from ..axe import Axe
+from axe_selenium_python import Axe
 
 _DEFAULT_TEST_FILE = path.join(path.dirname(__file__), "test_page.html")
 
@@ -25,6 +25,7 @@ def chrome_driver():
     opts = webdriver.ChromeOptions()
     opts.headless = True
     opts.add_argument("--no-sandbox")
+    opts.add_argument("--headless")
     driver_path = getenv("CHROMEDRIVER_PATH")
     driver = (
         webdriver.Chrome(options=opts, executable_path=driver_path)
@@ -40,10 +41,10 @@ def test_run_axe_sample_page_firefox(firefox_driver):
     """Run axe against sample page and verify JSON output is as expected."""
     data = _perform_axe_run(firefox_driver)
 
-    assert len(data["inapplicable"]) == 61
+    assert len(data["inapplicable"]) == 75
     assert len(data["incomplete"]) == 0
     assert len(data["passes"]) == 6
-    assert len(data["violations"]) == 8
+    assert len(data["violations"]) == 9
 
 
 @pytest.mark.nondestructive
@@ -51,10 +52,10 @@ def test_run_axe_sample_page_chrome(chrome_driver):
     """Run axe against sample page and verify JSON output is as expected."""
     data = _perform_axe_run(chrome_driver)
 
-    assert len(data["inapplicable"]) == 61
+    assert len(data["inapplicable"]) == 75
     assert len(data["incomplete"]) == 0
     assert len(data["passes"]) == 6
-    assert len(data["violations"]) == 8
+    assert len(data["violations"]) == 9
 
 
 def _perform_axe_run(driver):

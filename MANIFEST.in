@@ -1,2 +1,14 @@
-include LICENSE.txt README.rst axe_selenium_python/node_modules/axe-core/axe.min.js axe_selenium_python/tests/test_page.html
+include CODE_OF_CONDUCT.md
+include LICENSE.txt
+include README.rst
+include tox.ini
+include axe_selenium_python/node_modules/axe-core/axe.min.js
+include tests/test_page.html
+include package.json
+include package-lock.json
+include axe_selenium_python/package-lock.json
+include axe_selenium_python/package.json
 recursive-include *.rst *.txt
+recursive-include tests *.js
+recursive-include tests *.py
+recursive-include tests *.txt

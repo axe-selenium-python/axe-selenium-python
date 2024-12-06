@@ -4,14 +4,13 @@
 
 import json
 import os
-from io import open
 
 _DEFAULT_SCRIPT = os.path.join(
     os.path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
 )
 
 
-class Axe(object):
+class Axe:
     def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
         self.script_url = script_url
         self.selenium = selenium
@@ -23,7 +22,7 @@ class Axe(object):
         :param script_url: location of the axe-core script.
         :type script_url: string
         """
-        with open(self.script_url, "r", encoding="utf8") as f:
+        with open(self.script_url, encoding="utf8") as f:
             self.selenium.execute_script(f.read())
 
     def run(self, context=None, options=None):
@@ -110,6 +109,6 @@ class Axe(object):
 
         with open(filepath, "w", encoding="utf8") as f:
             try:
-                f.write(unicode(json.dumps(data, indent=4)))
+                f.write(json.dumps(data, indent=4))
             except NameError:
                 f.write(json.dumps(data, indent=4))
