@@ -1,4 +1,0 @@
-pytest==3.9.2
-selenium==3.14.1
-pytest-html==1.19.0
-pytest-mock==1.10.0
