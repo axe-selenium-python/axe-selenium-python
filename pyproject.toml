@@ -8,7 +8,7 @@ description = "Python library to integrate axe and selenium for web accessibilit
 dynamic = ["version"]
 readme = "README.rst"
 authors = [
-    {name="Kimberly Sereduck", email="ksereduck@mozilla.com"}
+  {name="Kimberly Sereduck", email="ksereduck@mozilla.com"}
 ]
 license = {"text" = "Mozilla Public License 2.0 (MPL 2.0)"}
 keywords = ["axe-core", "selenium", "pytest-selenium", "accessibility" , "automation", "mozilla"]
@@ -18,8 +18,42 @@ dependencies = [
   "pytest>=3.0",
 ]
 
+[project.optional-dependencies]
+lint = [
+  "pre-commit",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/axe-selenium-python/axe-selenium-python"
 "Issues" = "https://github.com/axe-selenium-python/axe-selenium-python/issues"
+
+[tool.ruff.lint]
+select = [
+  "A",
+  "B",
+  "BLE",
+  "C4",
+  "DTZ",
+  "E",
+  "ERA",
+  "F",
+  "FA",
+  "FLY",
+  "FURB",
+  "I",
+  "N",
+  "PERF",
+  "PIE",
+  "PT",
+  "RSE",
+  "RUF",
+  "SIM",
+  "T10",
+  "T20",
+  "W",
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
 
 [tool.setuptools_scm]
