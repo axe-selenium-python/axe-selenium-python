@@ -3,7 +3,9 @@
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import json
-from os import getcwd, getenv, path
+from os import getcwd
+from os import getenv
+from os import path
 
 import pytest
 from selenium import webdriver
