@@ -14,21 +14,23 @@ _DEFAULT_SCRIPT = Path(__file__).parent / "node_modules" / "axe-core" / "axe.min
 
 
 class Axe:
-    def __init__(self, selenium_driver, script_url: str | Path = _DEFAULT_SCRIPT) -> None:
+    def __init__(
+        self, selenium_driver, script_url: str | Path = _DEFAULT_SCRIPT
+    ) -> None:
         """
         Initialize Axe instance.
-        
+
         Args:
             selenium_driver: Selenium WebDriver instance
             script_url: Path to axe-core JavaScript file
-            
+
         Raises:
             FileNotFoundError: If script file doesn't exist
         """
         self.script_url = Path(script_url)
         self.selenium = selenium_driver
         self._is_injected = False
-        
+
         if not self.script_url.exists():
             msg = f"Axe script not found at: {self.script_url}"
             raise FileNotFoundError(msg)
@@ -36,12 +38,12 @@ class Axe:
     def inject(self) -> None:
         """
         Inject axe-core script into the current page and all iframes.
-        
+
         Raises:
             RuntimeError: If injection fails
         """
         try:
-            script_content = self.script_url.read_text(encoding="utf-8") 
+            script_content = self.script_url.read_text(encoding="utf-8")
             self.selenium.execute_script(script_content)
             self._is_injected = True
             logger.info("Axe-core successfully injected into page")
