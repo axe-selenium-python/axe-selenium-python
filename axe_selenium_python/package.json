@@ -3,19 +3,16 @@
   "version": "0.0.1",
   "description": "Integrate axe-core with python",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kimberlythegeek/axe-selenium-python.git"
+    "url": "git+https://github.com/axe-selenium-python/axe-selenium-python.git"
   },
   "author": "Kimberly Sereduck",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/kimberlythegeek/axe-selenium-python/issues"
+    "url": "https://github.com/axe-selenium-python/axe-selenium-python/issues"
   },
-  "homepage": "https://github.com/kimberlythegeek/axe-selenium-python#readme",
+  "homepage": "https://github.com/axe-selenium-python/axe-selenium-python#readme",
   "dependencies": {
     "axe-core": "^4.10.2"
   }
