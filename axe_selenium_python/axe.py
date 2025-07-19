@@ -2,28 +2,52 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import json
-import os
+from __future__ import annotations
 
-_DEFAULT_SCRIPT = os.path.join(
-    os.path.dirname(__file__), "node_modules", "axe-core", "axe.min.js"
-)
+import json
+import logging
+from pathlib import Path
+
+logger = logging.getLogger(__name__)
+
+_DEFAULT_SCRIPT = Path(__file__).parent / "node_modules" / "axe-core" / "axe.min.js"
 
 
 class Axe:
-    def __init__(self, selenium, script_url=_DEFAULT_SCRIPT):
-        self.script_url = script_url
-        self.selenium = selenium
-
-    def inject(self):
+    def __init__(self, selenium_driver, script_url: str | Path = _DEFAULT_SCRIPT) -> None:
         """
-        Recursively inject aXe into all iframes and the top level document.
-
-        :param script_url: location of the axe-core script.
-        :type script_url: string
+        Initialize Axe instance.
+        
+        Args:
+            selenium_driver: Selenium WebDriver instance
+            script_url: Path to axe-core JavaScript file
+            
+        Raises:
+            FileNotFoundError: If script file doesn't exist
         """
-        with open(self.script_url, encoding="utf8") as f:
-            self.selenium.execute_script(f.read())
+        self.script_url = Path(script_url)
+        self.selenium = selenium_driver
+        self._is_injected = False
+        
+        if not self.script_url.exists():
+            msg = f"Axe script not found at: {self.script_url}"
+            raise FileNotFoundError(msg)
+
+    def inject(self) -> None:
+        """
+        Inject axe-core script into the current page and all iframes.
+        
+        Raises:
+            RuntimeError: If injection fails
+        """
+        try:
+            script_content = self.script_url.read_text(encoding="utf-8") 
+            self.selenium.execute_script(script_content)
+            self._is_injected = True
+            logger.info("Axe-core successfully injected into page")
+        except Exception as e:
+            msg = f"Failed to inject axe-core script: {e}"
+            raise RuntimeError(msg) from e
 
     def run(self, context=None, options=None):
         """
@@ -96,19 +120,15 @@ class Axe:
         """
         Write JSON to file with the specified name.
 
-        :param name: Path to the file to be written to. If no path is passed
-                     a new JSON file "results.json" will be created in the
-                     current working directory.
-        :param output: JSON object.
+        param name: Path to the file to be written to. If no path is passed
+                    a new JSON file "results.json" will be created in the
+                    current working directory.
+        :param data: JSON object.
         """
-
         if name:
-            filepath = os.path.abspath(name)
+            filepath = Path(name).resolve()
         else:
-            filepath = os.path.join(os.path.getcwd(), "results.json")
+            filepath = Path.cwd() / "results.json"
 
-        with open(filepath, "w", encoding="utf8") as f:
-            try:
-                f.write(json.dumps(data, indent=4))
-            except NameError:
-                f.write(json.dumps(data, indent=4))
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
