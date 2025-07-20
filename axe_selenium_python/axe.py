@@ -55,68 +55,88 @@ class Axe:
         """
         Run axe against the current page.
 
-        :param context: which page part(s) to analyze and/or what to exclude.
-        :param options: dictionary of aXe options.
+        Args:
+            context: which page part(s) to analyze and/or what to exclude.
+            options: dictionary of aXe options.
+
+        Raises:
+            RuntimeError: If axe is not injected or analysis fails
         """
-        template = (
-            "var callback = arguments[arguments.length - 1];"
-            + "axe.run(%s).then(results => callback(results))"
-        )
-        args = ""
 
-        # If context parameter is passed, add to args
+        if not self._is_injected:
+            msg = "Axe not injected. Call inject() first."
+            raise RuntimeError(msg)
+
+        args = []
         if context is not None:
-            args += "%r" % context
-        # Add comma delimiter only if both parameters are passed
-        if context is not None and options is not None:
-            args += ","
-        # If options parameter is passed, add to args
+            args.append(json.dumps(context))
         if options is not None:
-            args += "%s" % options
+            if context is None:
+                args.append("document")
+            args.append(json.dumps(options))
 
-        command = template % args
-        response = self.selenium.execute_async_script(command)
-        return response
+        js_args = ", ".join(args) if args else ""
+
+        command = f"""
+        var callback = arguments[arguments.length - 1];
+        axe.run({js_args})
+            .then(results => callback(results))
+            .catch(error => callback({{error: error.message}}));
+        """
+
+        try:
+            response = self.selenium.execute_async_script(command)
+
+            if "error" in response:
+                msg = f"Axe analysis failed: {response['error']}"
+                raise RuntimeError(msg)
+
+            return response
+        except Exception as e:
+            msg = f"Failed to execute axe analysis: {e}"
+            raise RuntimeError(msg) from e
 
     def report(self, violations):
         """
         Return readable report of accessibility violations found.
 
-        :param violations: Dictionary of violations.
-        :type violations: dict
-        :return report: Readable report of violations.
-        :rtype: string
+        Args:
+            violations: List of violations from axe results.
+
+        Returns:
+            Formatted string report.
         """
-        string = ""
-        string += "Found " + str(len(violations)) + " accessibility violations:"
-        for violation in violations:
-            string += (
-                "\n\n\nRule Violated:\n"
-                + violation["id"]
-                + " - "
-                + violation["description"]
-                + "\n\tURL: "
-                + violation["helpUrl"]
-                + "\n\tImpact Level: "
-                + violation["impact"]
-                + "\n\tTags:"
-            )
-            for tag in violation["tags"]:
-                string += " " + tag
-            string += "\n\tElements Affected:"
-            i = 1
-            for node in violation["nodes"]:
-                for target in node["target"]:
-                    string += "\n\t" + str(i) + ") Target: " + target
-                    i += 1
-                for item in node["all"]:
-                    string += "\n\t\t" + item["message"]
-                for item in node["any"]:
-                    string += "\n\t\t" + item["message"]
-                for item in node["none"]:
-                    string += "\n\t\t" + item["message"]
-            string += "\n\n\n"
-        return string
+        if not violations:
+            return "No accessibility violations found!"
+
+        lines = [f"Found {len(violations)} accessibility violations:"]
+
+        for i, violation in enumerate(violations, 1):
+            lines.append(f"\n{i}. Rule: {violation['id']} - {violation['description']}")
+            lines.append(f"   Impact Level: {violation['impact']}")
+            lines.append(f"   Help URL: {violation['helpUrl']}")
+            lines.append(f"   Tags: {', '.join(violation['tags'])}")
+            lines.append("   Elements Affected:")
+
+            for node_idx, node in enumerate(violation["nodes"], 1):
+                lines.extend(
+                    f"     {node_idx}) Target: {target}" for target in node["target"]
+                )
+
+                for message_list in [
+                    node.get("all", []),
+                    node.get("any", []),
+                    node.get("none", []),
+                ]:
+                    lines.extend(
+                        f"        - {item['message']}"
+                        for item in message_list
+                        if item.get("message")
+                    )
+
+            lines.append("")
+
+        return "\n".join(lines)
 
     def write_results(self, data, name=None):
         """
@@ -129,5 +149,10 @@ class Axe:
         """
         filepath = Path(name).resolve() if name else Path.cwd() / "results.json"
 
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4)
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+            logger.info("Results saved to: %s", filepath)
+        except Exception as e:
+            msg = f"Failed to save results to {filepath}: {e}"
+            raise OSError(msg) from e
