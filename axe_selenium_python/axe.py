@@ -127,10 +127,7 @@ class Axe:
                     current working directory.
         :param data: JSON object.
         """
-        if name:
-            filepath = Path(name).resolve()
-        else:
-            filepath = Path.cwd() / "results.json"
+        filepath = Path(name).resolve() if name else Path.cwd() / "results.json"
 
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
