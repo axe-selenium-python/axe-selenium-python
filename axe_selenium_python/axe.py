@@ -105,7 +105,7 @@ class Axe:
         if name:
             filepath = os.path.abspath(name)
         else:
-            filepath = os.path.join(os.path.getcwd(), "results.json")
+            filepath = os.path.abspath("results.json")
 
         with open(filepath, "w", encoding="utf8") as f:
             try:
