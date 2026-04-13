@@ -15,7 +15,7 @@ keywords = ["axe-core", "selenium", "pytest-selenium", "accessibility" , "automa
 requires-python = ">=3.12"
 dependencies = [
   "selenium>=4.2",
-  "pytest>=3.0",
+  "pytest>=9.0.3",
 ]
 
 [project.optional-dependencies]
