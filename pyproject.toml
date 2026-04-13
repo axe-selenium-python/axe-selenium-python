@@ -14,7 +14,7 @@ license = {"text" = "Mozilla Public License 2.0 (MPL 2.0)"}
 keywords = ["axe-core", "selenium", "pytest-selenium", "accessibility" , "automation", "mozilla"]
 requires-python = ">=3.12"
 dependencies = [
-  "selenium>=4.2",
+  "selenium>=4.43.0",
   "pytest>=3.0",
 ]
 
